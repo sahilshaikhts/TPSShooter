@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: PlayerCombat_KM
+  m_EditorClassIdentifier: Assembly-CSharp:gameName.InputSystem:KeyBindings
+  InputDeviceType: 1
+  Input:
+  - m_action: Movement
+    m_keycode: 1000
+    m_inputKeyType: 3
+  - m_action: Jump
+    m_keycode: 32
+    m_inputKeyType: 0
+  - m_action: CameraLook
+    m_keycode: 1001
+    m_inputKeyType: 3
