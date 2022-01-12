@@ -65,6 +65,7 @@
     <Compile Include="Assets\Scripts\CameraSystem\Camera\TPSFollowCamera.cs" />
     <Compile Include="Assets\Scripts\Character\Player\Controller\PlayerController.cs" />
     <Compile Include="Assets\Scripts\WeaponSystem\Source\WeaponClasses\WeponHolder.cs" />
+    <Compile Include="Assets\Scripts\ObjectPool\ObjectPool.cs" />
     <Compile Include="Assets\Scripts\CustomComponent\MovementComponent.cs" />
     <Compile Include="Assets\Scripts\WeaponSystem\Source\WeaponClasses\Base\WeaponBase.cs" />
     <Compile Include="Assets\Scripts\WeaponSystem\Source\WeaponClasses\Base\WeaponHolderBase.cs" />
@@ -75,6 +76,13 @@
     <Compile Include="Assets\Scripts\WeaponSystem\Source\ProjectileResponseData.cs" />
     <Compile Include="Assets\Scripts\Character\Character.cs" />
     <Compile Include="Assets\Scripts\WeaponSystem\Source\WeaponClasses\RangedWeapon.cs" />
+    <Compile Include="Assets\Scripts\BehaviourTree\Source\Node.cs" />
+    <Compile Include="Assets\Scripts\BehaviourTree\Source\Sequence.cs" />
+    <Compile Include="Assets\Scripts\BehaviourTree\Source\Selector.cs" />
+    <Compile Include="Assets\Scripts\BehaviourTree\Source\BehaviourTree.cs" />
+    <Compile Include="Assets\Scripts\BehaviourTree\EnemyAI.cs" />
+    <Compile Include="Assets\Scripts\BehaviourTree\IsWithinRange.cs" />
+    <Compile Include="Assets\Scripts\BehaviourTree\MoveTowards.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
