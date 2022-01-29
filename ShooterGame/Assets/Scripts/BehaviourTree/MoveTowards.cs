@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class MoveTowards : Node
 {
-    public MoveTowards(BehaviourTree aTree, string aKeyTargetPostion) : base(aTree) {key_targetPosition = aKeyTargetPostion; }
+    public MoveTowards(BehaviourTree aTree, string aKeyOwnerGameObject, string aKeyTargetPostion) : base(aTree) 
+    {
+        key_ownerGameObject = aKeyOwnerGameObject; 
+        key_targetPosition = aKeyTargetPostion; 
+    }
 
     public string key_ownerGameObject;
     public string key_targetPosition;
@@ -21,6 +25,6 @@ public class MoveTowards : Node
 
         GameManager.GetEventManager().AddEvent(new MoveEvent(ownerObj, direction.normalized));
 
-        return NodeState.Failed;
+        return NodeState.Running;
     }
 }

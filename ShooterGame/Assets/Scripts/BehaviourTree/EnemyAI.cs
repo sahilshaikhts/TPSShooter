@@ -7,7 +7,10 @@ public class EnemyAI : BehaviourTree
         m_root = new Selector(this);
         //MoveInRange
         Selector moveInRange = new Selector(this);
-        IsWithinRange withingRangeNode = new(this, "SelfPosition", "TargetPostion");
-        MoveTowards withingRangeNode = new(this, "TargetPostion");
+        IsWithinRange withingRangeNode = new IsWithinRange(this, "SelfPosition", "TargetPostion");
+        MoveTowards moveTowardsNode = new MoveTowards(this, "ownerGO","TargetPostion");
+
+        moveInRange.AddChildNode(withingRangeNode);
+        moveInRange.AddChildNode(moveTowardsNode);
     }
 }

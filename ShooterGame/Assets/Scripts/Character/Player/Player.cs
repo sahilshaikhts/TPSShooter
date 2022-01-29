@@ -5,7 +5,7 @@ using WeaponSystem;
 
 namespace ShootingGame
 {
-public class Player : Character
+public class Player : Character,IShotable
 {
     PlayerController m_playerController;
     MovementComponent m_movementComponent;
@@ -70,5 +70,10 @@ public class Player : Character
         GUI.color = Color.white;
         GUI.DrawTexture(new Rect(Screen.width / 2, Screen.height / 2, 4, 4), tmp_crosshair);
     }
-}
+
+    public void HandleGettingShot(Vector3 projetileDirection, int damageAmount)
+    {
+        throw new System.NotImplementedException();
+    }
+    }
 }

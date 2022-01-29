@@ -10,6 +10,9 @@ public class MovementComponent : MonoBehaviour
     private Vector3 m_velocity;
     private Vector3 m_additionalForce;
     private Vector3 m_additionalRotationDirection;
+
+    [SerializeField] private Transform m_characterFeet;
+
     [SerializeField] bool LookTowardsMovementDirection=false;
 
     [SerializeField] private float m_speed, m_maxSpeed;
@@ -91,10 +94,20 @@ public class MovementComponent : MonoBehaviour
             m_inputDirection = Vector3.zero;
 
             m_velocity = newVelocity;
+            if (LookTowardsMovementDirection)
+            {
+                Vector3 facingDirection = m_velocity.normalized;
+                facingDirection.Normalize();
+                facingDirection.y = 0;
+
+                if (m_owner_rigidbody.velocity.magnitude > 0.1f)
+                    RotateTowards(facingDirection);
+            }
         }
         else Friction();
 
-        if (doJump) {PerformJump(); }
+        if (doJump) { PerformJump(); }
+        doJump = false;
 
         if (m_additionalForce.sqrMagnitude > 0)
         {
@@ -103,22 +116,13 @@ public class MovementComponent : MonoBehaviour
 
         ApplyVelocity();
 
-        if (LookTowardsMovementDirection)
-        {
-            Vector3 facingDirection = m_owner_rigidbody.velocity.normalized;
-            facingDirection.Normalize();
-            facingDirection.y = 0;
 
-            if (m_owner_rigidbody.velocity.magnitude > 0.1f)
-                RotateTowards( facingDirection);
-        }
 
         if (m_additionalRotationDirection.sqrMagnitude > 0)
         {
             RotateTowards(m_additionalRotationDirection);
             m_additionalRotationDirection = Vector3.zero;
         }
-        doJump = false;
     }
 
 
@@ -199,8 +203,7 @@ public class MovementComponent : MonoBehaviour
   
     public void ApplyForce(Vector3 direction, float force)
     {
-        m_additionalForce += direction * force;
-        Debug.Log("Force");
+        m_additionalForce += direction * force; 
     }
 
     public void Jump() { doJump = true; }

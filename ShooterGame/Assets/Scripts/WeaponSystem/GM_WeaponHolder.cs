@@ -1,6 +1,26 @@
 ﻿using System.Collections;
 using UnityEngine;
 
+
+
+
+
+
+
+
+
+
+///
+///
+//Todo: To delete the projectile after a time ,put Destroy code in the init of the projectle
+///
+///
+
+
+
+
+
+
 namespace WeaponSystem
 {
 public class GM_WeaponHolder : WeaponHolderBase
@@ -29,21 +49,16 @@ public class GM_WeaponHolder : WeaponHolderBase
 
     protected override void SpawnProjectile(WeaponHitResult aWeaponHitResult)
     {
-        GameObject projectileObj = new GameObject("Projectile");
-        projectileObj.tag = "projectile";
-
-//        GameObject obj= m_projectilePool.Spawn(aWeaponHitResult.GetHitPosition(),Quaternion.identity);
+        GameObject projectileObj = m_projectilePool.Spawn(aWeaponHitResult.GetHitPosition(),Quaternion.identity);
 
         projectileObj.GetComponent<Projectile>().Initzialize(aWeaponHitResult.GetHitPosition(), aWeaponHitResult.GetHitDirection(), m_weapons[m_currentWeaponIndex].GetDamageAmount());
 
-        //MonoBehaviour.StartCoroutine(DeactivateProjetile(obj));
+        GameManager.GetTimer().TimedExecution(DeactivateProjetile,0.1f);
     }
 
-    IEnumerator DeactivateProjetile(GameObject aObject)
+    void DeactivateProjetile()
     {
-        yield return new WaitForSeconds(0.1f);
-
-        m_projectilePool.DeactivateObject(aObject);
+        m_projectilePool.DeactivateFirstObject();
     }
 
 }

@@ -11,7 +11,7 @@ public abstract class WeaponBase : ScriptableObject
     [SerializeField] protected float m_targetPushForce;
 
     public abstract WeaponHitResult Fire(LayerMask aRayMask, Ray ray);
-
+    
     public string GetName() { return m_name; }
     public int GetDamageAmount() { return m_damageAmount; }
     public Mesh GetMesh() { return m_mesh; }

@@ -81,7 +81,7 @@ public class CameraManager
             {
                 TPSFollowCamera playerTPSCamera = (TPSFollowCamera)playerCameraBase;
                 playerTPSCamera.SetDistance(playerTPSCamera.GetDistance() / 2);
-            }
+            }   
         }
         else if (inputEvent.GetAction() == "UnFocusAimming")
         {

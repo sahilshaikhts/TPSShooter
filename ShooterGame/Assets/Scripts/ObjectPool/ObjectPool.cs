@@ -39,34 +39,9 @@ public struct ObjectPool
 
     }
 
-    public void DeactivateObjects(int count)        //Sort the pool_object and point to the new avaiblable object
+    public void DeactivateFirstObject()        //Sort the pool_object and point to the new avaiblable object
     {
-        if (count > 0)
-        {
-            GameObject[] requestedObjects = new GameObject[count];
-
-            //store the list of objects in a temporary array of GOs
-            for (int i = 0; i < count; i++)
-            {
-                requestedObjects[i] = pool_Objects[i];
-                requestedObjects[i].SetActive(false);
-            }
-
-            //move the acttive GOs that are not requested to be deactivated to the top 
-            for (int i = count, k = 0; i < lastIndex; i++, k++)
-            {
-                pool_Objects[k] = pool_Objects[i];
-            }
-
-            //copy the store GOs that were requested above the last index
-            for (int i = lastIndex - count, k = 0; i < lastIndex; i++, k++)
-            {
-                pool_Objects[i] = requestedObjects[k];
-            }
-
-            lastIndex -= count;
-        }
-
+        DeactivateObject(pool_Objects[0]);
     }
 
     public void DeactivateObject(GameObject aObject)        //Find the requested object in the active region of the array and deactivates it 

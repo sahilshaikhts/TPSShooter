@@ -26,6 +26,6 @@ public class IsWithinRange : Node
             if (Vector3.Distance(position, targetPosition) < distance)
                 return NodeState.Sucessful;
         }
-        return NodeState.Failed;
+        return NodeState.Running;
     }
 }

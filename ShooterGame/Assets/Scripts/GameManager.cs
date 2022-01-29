@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     static EventManager m_eventManager;
     static CameraManager m_cameraManager;
     static InputManager m_inputManager;
-
+    static Timer m_timer;
     [SerializeField] public InputDevice tmp_inputDevice;//tmp
 
     private void OnEnable()
@@ -16,10 +16,10 @@ public class GameManager : MonoBehaviour
         m_eventManager = new EventManager();
         m_cameraManager = new CameraManager();
         m_inputManager = new InputManager();
+        m_timer=new Timer();
 
         //TODO: this should be loaded from saved file from disk ,not scirptableobject
         AddInputDevice((InputDevice)tmp_inputDevice);
-
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -27,12 +27,14 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        m_timer.Update();
         m_eventManager.Update();
         m_inputManager.Update();
     }
 
     public static CameraManager GetCameraManager() { return m_cameraManager; }
     public static EventManager GetEventManager() { return m_eventManager; }
+    public static Timer GetTimer() { return m_timer; }
 
     public void SetNewInputDevice(InputDevice aInputDevice) { m_inputManager.ClearInputDevices(); m_inputManager.AddInputDevice(aInputDevice); }
     public void AddInputDevice(InputDevice aInputDevice) { m_inputManager.AddInputDevice(aInputDevice); }
