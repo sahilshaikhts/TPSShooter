@@ -24,7 +24,7 @@ public class MovementComponent : MonoBehaviour
     [SerializeField] private LayerMask m_jumpGroundCheckMask;
 
     private bool doJump = false;
-    private bool onGround;
+    [SerializeField]private bool onGround;
 
     private void Start()
     {
@@ -148,9 +148,9 @@ public class MovementComponent : MonoBehaviour
 
     private bool CheckIfOnGround()
     {
-        Ray ray = new Ray(m_owner.transform.position + Vector3.up, -m_owner.transform.up);
+        Ray ray = new Ray(m_characterFeet.position, Vector3.down);
 
-        RaycastHit[] hitInfos = Physics.SphereCastAll(ray.origin, 0.5f, ray.direction, 1.02f, m_jumpGroundCheckMask);
+        RaycastHit[] hitInfos = Physics.SphereCastAll(ray.origin, 0.1f, ray.direction, m_characterFeet.localPosition.y+0.1f, m_jumpGroundCheckMask);
 
         if (hitInfos.Length > 0)
             return true;
@@ -163,10 +163,10 @@ public class MovementComponent : MonoBehaviour
         Vector3 normal = Vector3.zero;
         RaycastHit hit = new RaycastHit();
 
-        Ray ray = new Ray(m_owner.transform.position + Vector3.up, Vector3.down);
-        
-        RaycastHit[] hitInfos = Physics.SphereCastAll(ray.origin, 0.5f, ray.direction, 2, m_jumpGroundCheckMask);
+        Ray ray = new Ray(m_characterFeet.position, Vector3.down);
 
+        RaycastHit[] hitInfos = Physics.SphereCastAll(ray.origin, 0.1f, ray.direction, 2, m_jumpGroundCheckMask);
+      
         float minGroundDist = float.MaxValue;
         foreach (RaycastHit hitInfo in hitInfos)
         {
@@ -177,8 +177,6 @@ public class MovementComponent : MonoBehaviour
                 normal = hit.normal;
             }
         }
-
-        Debug.DrawRay(hit.point, normal, Color.red, 1);
         return normal;
 
     }

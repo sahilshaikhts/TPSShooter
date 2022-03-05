@@ -4,33 +4,24 @@ using UnityEngine;
 namespace WeaponSystem
 {
 public abstract class WeaponHolderBase
+{
+    protected List<WeaponBase> m_weapons;
+    protected int m_currentWeaponIndex = 0;
+    protected LayerMask m_layermask;
+
+    public WeaponHolderBase(LayerMask aLayerMask)
     {
-        protected List<WeaponBase> m_weapons;
-        protected int m_currentWeaponIndex = 0;
-        protected LayerMask m_layermask;
+        m_layermask = aLayerMask;
+        m_weapons = new List<WeaponBase>();
+    }
 
-        public WeaponHolderBase(LayerMask aLayerMask)
-        {
-            m_layermask = aLayerMask;
-            m_weapons = new List<WeaponBase>();
-        }
+    public void Fire(Ray ray)
+    {
+        if (m_weapons.Count == 0) return;
+        m_weapons[m_currentWeaponIndex].Fire(m_layermask, ray);
+    }
 
-        public void Fire(Ray ray)
-        {
-            if (m_weapons.Count == 0) return;
-
-            WeaponHitResult weaponHitResult;
-            weaponHitResult = m_weapons[m_currentWeaponIndex].Fire(m_layermask, ray);
-
-            if (weaponHitResult != null)
-            {
-                SpawnProjectile(weaponHitResult);
-            }
-        }
-
-        protected abstract void SpawnProjectile(WeaponHitResult weaponHitResult);
-
-        public void StepWeapon(int stepDirection)
+    public void StepWeapon(int stepDirection)
         {
             if (m_weapons.Count > 1)
             {
@@ -39,19 +30,18 @@ public abstract class WeaponHolderBase
             }
         }
 
-        public void AddNewWeapon(WeaponBase aNewweapon)
-        {
-            m_weapons.Add(aNewweapon);
-        }
+    public void AddNewWeapon(WeaponBase aNewweapon)
+    {
+        m_weapons.Add(aNewweapon);
     }
+}
 
 public class Projectile : MonoBehaviour
 {
-    Vector3 m_hitPositon;
     Vector3 m_hitDirection;
     int m_damageAmount = 0;
 
-    ProjectileFXData m_projectileFXData;
+    public ProjectileFXData m_projectileFXData;
 
     private void OnEnable()
     {
@@ -60,19 +50,18 @@ public class Projectile : MonoBehaviour
 
     public void Initzialize(Vector3 aHitPosition, Vector3 aHitDirection, int aDamageAmount)
     {
-        m_hitPositon = aHitPosition;
         m_hitDirection = aHitDirection;
         m_damageAmount = aDamageAmount;
+        GetComponent<SphereCollider>().enabled = true;
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (m_projectileFXData != null)
-        {
-            TriggerProjectileParticle(m_projectileFXData.GetProjectileParticleEffect());
-            TriggerSurfaceParticleEffect(m_projectileFXData.GetSurfaceParticleEffect());
-            TriggerSoundEffect(m_projectileFXData.GetSoundEffect());
-        }
+        TriggerProjectileParticle(m_projectileFXData.GetProjectileParticleEffect());
+        TriggerSurfaceParticleEffect(m_projectileFXData.GetSurfaceParticleEffect());
+        TriggerSoundEffect(m_projectileFXData.GetSoundEffect());
+
         if (other.GetComponent<IShotable>() != null)
         {
             other.GetComponent<IShotable>().HandleGettingShot(m_hitDirection, m_damageAmount);

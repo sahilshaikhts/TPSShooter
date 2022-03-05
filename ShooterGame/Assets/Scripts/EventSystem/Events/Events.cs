@@ -1,4 +1,5 @@
 using UnityEngine;
+
 namespace EventSystem
 {
 public class MoveEvent : IEvent

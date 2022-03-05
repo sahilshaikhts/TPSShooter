@@ -14,7 +14,7 @@ public class IsWithinRange : Node
 
     public string key_ownerPosition;
     public string key_targetPosition;
-    public float distance = 1;
+    public float distance = 10;
 
     public override NodeState Execute()
     {

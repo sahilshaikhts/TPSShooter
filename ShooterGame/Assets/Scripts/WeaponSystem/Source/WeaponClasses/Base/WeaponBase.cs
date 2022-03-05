@@ -10,7 +10,10 @@ public abstract class WeaponBase : ScriptableObject
     [SerializeField] protected float m_fireRate;
     [SerializeField] protected float m_targetPushForce;
 
-    public abstract WeaponHitResult Fire(LayerMask aRayMask, Ray ray);
+    protected ObjectPool m_projectilePool;
+
+    public abstract void Fire(LayerMask aRayMask, Ray ray);
+    public abstract void SpawnProjectile(WeaponHitResult weaponHitResult);
     
     public string GetName() { return m_name; }
     public int GetDamageAmount() { return m_damageAmount; }

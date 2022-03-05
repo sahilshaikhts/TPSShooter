@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13aaf0bbd8d44794f8602d96230d9092, type: 3}
   m_Name: Pistol
   m_EditorClassIdentifier: 
-  m_name: 
+  m_name: Pistol
   m_mesh: {fileID: 0}
-  m_weapon:
-    m_dame: 
-    m_desh: {fileID: 0}
+  m_damageAmount: 0
+  m_fireRate: 0
+  m_targetPushForce: 0
   m_clipSize: 10
-  m_ammo: 10
+  m_ammo: 100
+  m_projectileFXData:
+    m_projectleParticleEffect: {fileID: 0}
+    m_surfaceParticleEffect: {fileID: 4334894617853508249, guid: e474802410d7ac447ad585a6e5cd9973, type: 3}
+    m_sfx: {fileID: 0}

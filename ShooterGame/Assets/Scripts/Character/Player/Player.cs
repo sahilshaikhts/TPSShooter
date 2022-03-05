@@ -9,7 +9,7 @@ public class Player : Character,IShotable
 {
     PlayerController m_playerController;
     MovementComponent m_movementComponent;
-    GM_WeaponHolder m_weaponHolder;
+    WeaponHolder m_weaponHolder;
 
     [SerializeField]WeaponBase tmp_pistol;
     [SerializeField]LayerMask m_weaponLayerMask;
@@ -19,7 +19,7 @@ public class Player : Character,IShotable
     {
         m_playerController = new PlayerController(gameObject,GameManager.GetCameraManager().GetCamera("PlayerFollowCamera").gameObject);
         m_movementComponent = GetComponent<MovementComponent>();
-        m_weaponHolder = new GM_WeaponHolder(m_weaponLayerMask);
+        m_weaponHolder = new WeaponHolder(m_weaponLayerMask);
 
         GameManager.GetEventManager().SubscribeToEvent(MoveEvent.EventType(), HandleMoveEvent);
         GameManager.GetEventManager().SubscribeToEvent(JumpEvent.EventType(), HandleJumpEvent);
@@ -31,14 +31,14 @@ public class Player : Character,IShotable
         m_weaponHolder.AddNewWeapon(pistol);
     }
 
-    void HandleJumpEvent(EventSystem.IEvent aEvent) 
+    void HandleJumpEvent(IEvent aEvent) 
     {
         JumpEvent jumpEvent = (JumpEvent)aEvent;
         if (jumpEvent.GetCallerGameObject() == gameObject)
             m_movementComponent.Jump();
     }
 
-    void HandleSetPlayerRotationEvent(EventSystem.IEvent aEvent)
+    void HandleSetPlayerRotationEvent(IEvent aEvent)
     {
         SetPlayerRotationEvent rotateEvent = (SetPlayerRotationEvent)aEvent;
         Vector3 rotation = rotateEvent.GetRotation();
@@ -47,13 +47,13 @@ public class Player : Character,IShotable
         m_movementComponent.AddRotation(rotation);
     }
 
-    void HandleMoveEvent(EventSystem.IEvent aEvent)
+    void HandleMoveEvent(IEvent aEvent)
     {
         MoveEvent moveEvent = (MoveEvent)aEvent;
         m_movementComponent.SetMovementDirection(moveEvent.GetDirection());
     }
 
-    void HandleWeaponFireEvent(EventSystem.IEvent aEvent)
+    void HandleWeaponFireEvent(IEvent aEvent)
     {
         WeaponFireEvent weaponFireEvent = (WeaponFireEvent)aEvent;
         if(weaponFireEvent.GetCallerObject()==gameObject)

@@ -7,12 +7,30 @@ public class BehaviourTree : MonoBehaviour
 {
     protected Node m_root;
     protected Hashtable m_blackboard;
-
-    NodeState Update()
+    private void OnEnable()
+    {
+        m_blackboard=new Hashtable();
+    }
+    protected NodeState UpdateNodes()
     {
         return m_root.Execute();
     }
 
+
+    public void AddKey(string key)
+    {
+        if (m_blackboard.ContainsKey(key) == false)
+        {
+            m_blackboard.Add(key, null);
+        }
+    }
+    public void AddKey(string key,Object aValue)
+    {
+        if (m_blackboard.ContainsKey(key) == false)
+        {
+            m_blackboard.Add(key, aValue);
+        }
+    }
     public object GetData(string aKey)
     {
        if( m_blackboard.ContainsKey(aKey))

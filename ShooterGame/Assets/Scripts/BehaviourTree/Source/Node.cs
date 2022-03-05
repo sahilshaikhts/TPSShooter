@@ -9,7 +9,9 @@ public abstract class Node
     protected Node m_parentNode;
     protected NodeState m_state;
 
-    public Node(BehaviourTree aTree) { m_tree = aTree; }
+    protected int m_currentChildIndex=-1;
+
+    public Node(BehaviourTree aTree) { m_tree = aTree; m_childNodes = new List<Node>(); }
     public abstract NodeState Execute();
 
     protected object GetData(string aKey)
@@ -20,7 +22,6 @@ public abstract class Node
         }
             return null;
     }
-
     public void SetParentNode(Node aParent) { m_parentNode = aParent; }
     public void SetBehaviourTree(BehaviourTree aTree) { m_tree = aTree; }
 

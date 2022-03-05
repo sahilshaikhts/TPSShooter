@@ -84,6 +84,7 @@
     <Compile Include="Assets\Scripts\WeaponSystem\Source\WeaponClasses\RangedWeapon.cs" />
     <Compile Include="Assets\Scripts\BehaviourTree\Source\Selector.cs" />
     <Compile Include="Assets\Scripts\Utilities\Timer.cs" />
+    <Compile Include="Assets\Scripts\EventSystem\Events\AIEvents.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

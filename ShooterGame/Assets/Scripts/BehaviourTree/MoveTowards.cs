@@ -15,16 +15,16 @@ public class MoveTowards : Node
 
     public override NodeState Execute()
     {
-        GameObject ownerObj = (GameObject)GetData(key_ownerGameObject);
+        Transform ownerTransform = (Transform)GetData(key_ownerGameObject);
         Vector3 targetPostion = (Vector3)GetData(key_targetPosition);
 
-        if (ownerObj==null || targetPostion==null) 
+        if (ownerTransform == null || targetPostion==null) 
             return NodeState.Failed;
 
-        Vector3 direction = ownerObj.transform.position - targetPostion;
+        Vector3 direction = targetPostion-ownerTransform.position;
 
-        GameManager.GetEventManager().AddEvent(new MoveEvent(ownerObj, direction.normalized));
+        GameManager.GetEventManager().AddEvent(new AIMoveEvent(ownerTransform.gameObject, direction.normalized));
 
-        return NodeState.Running;
+        return NodeState.Sucessful;
     }
 }
