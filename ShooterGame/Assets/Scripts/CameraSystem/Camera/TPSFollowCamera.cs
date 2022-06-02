@@ -56,7 +56,7 @@ public class TPSFollowCamera : BaseCamera
         if (Physics.Raycast(ray, out hit, distacne, m_obstacleCheckMask))
         {
             Debug.DrawLine(ray.origin, hit.point, Color.black, 2);
-            return hit.point;
+            return hit.point-ray.direction*0.2f;
         }
 
         return cameraPosition;

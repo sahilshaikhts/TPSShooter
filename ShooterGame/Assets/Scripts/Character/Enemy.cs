@@ -9,9 +9,9 @@ public class Enemy : Character, IShotable
 {
     MovementComponent m_movementComponent;
     private void Start()
-    {
+    {   
         m_movementComponent = GetComponent<MovementComponent>();
-        GameManager.GetEventManager().SubscribeToEvent(AIMoveEvent.EventType(), HandleMoveEvent);
+        GameManager.instance.GetEventManager().SubscribeToEvent(AIMoveEvent.EventType(), HandleMoveEvent);
     }
 
     private void HandleMoveEvent(IEvent aEvent)

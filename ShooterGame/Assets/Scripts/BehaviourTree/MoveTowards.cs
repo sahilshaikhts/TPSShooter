@@ -23,7 +23,7 @@ public class MoveTowards : Node
 
         Vector3 direction = targetPostion-ownerTransform.position;
 
-        GameManager.GetEventManager().AddEvent(new AIMoveEvent(ownerTransform.gameObject, direction.normalized));
+        GameManager.instance.GetEventManager().AddEvent(new AIMoveEvent(ownerTransform.gameObject, direction.normalized));
 
         return NodeState.Sucessful;
     }

@@ -13,8 +13,8 @@ public class CameraManager
     {
         m_sceneCameras = new Dictionary<string, BaseCamera>();
 
-        GameManager.GetEventManager().SubscribeToEvent(InputEvent.EventType(), HandleInputEvent);
-        GameManager.GetEventManager().SubscribeToEvent(AxisInputEvent.EventType(), HandleAxisInputEvent);
+        GameManager.instance.GetEventManager().SubscribeToEvent(InputEvent.EventType(), HandleInputEvent);
+        GameManager.instance.GetEventManager().SubscribeToEvent(AxisInputEvent.EventType(), HandleAxisInputEvent);
     }
 
     public void SwitchCamera(BaseCamera aNewActiveCamera)
@@ -108,7 +108,7 @@ public class CameraManager
                 TPSFollowCamera playerCamera = (TPSFollowCamera)playerCameraBase;
                 playerCamera.MouseMoved(inputEvent.GetValue());
 
-                GameManager.GetEventManager().AddEvent(new SetPlayerRotationEvent(playerCamera.GetGameObject().transform.forward));
+                GameManager.instance.GetEventManager().AddEvent(new SetPlayerRotationEvent(playerCamera.GetGameObject().transform.forward));
             }
         }
     }

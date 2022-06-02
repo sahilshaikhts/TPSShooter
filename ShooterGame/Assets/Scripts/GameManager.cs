@@ -1,22 +1,30 @@
+using UnityEngine;
 using CameraSystem;
 using EventSystem;
 using InputSystem;
-using UnityEngine;
+using Sahil.AStar;
 
 public class GameManager : MonoBehaviour
 {
-    static EventManager m_eventManager;
-    static CameraManager m_cameraManager;
-    static InputManager m_inputManager;
-    static Timer m_timer;
+    public static GameManager instance;
+    EventManager m_eventManager;
+    CameraManager m_cameraManager;
+    InputManager m_inputManager;
+    Timer m_timer;
+
+    //[SerializeField] AStar_Grid m_AStar_Grid;
+
     [SerializeField] public InputDevice tmp_inputDevice;//tmp
 
     private void OnEnable()
     {
+        instance = this;
         m_eventManager = new EventManager();
         m_cameraManager = new CameraManager();
         m_inputManager = new InputManager();
         m_timer=new Timer();
+
+        //m_AStar_Grid.CreateGrid();
 
         //TODO: this should be loaded from saved file from disk ,not scirptableobject
         AddInputDevice((InputDevice)tmp_inputDevice);
@@ -32,11 +40,14 @@ public class GameManager : MonoBehaviour
         m_inputManager.Update();
     }
 
-    public static CameraManager GetCameraManager() { return m_cameraManager; }
-    public static EventManager GetEventManager() { return m_eventManager; }
-    public static Timer GetTimer() { return m_timer; }
+    public CameraManager GetCameraManager() { return m_cameraManager; }
+    public EventManager GetEventManager() { return m_eventManager; }
+    public InputManager GetInputManager() { return m_inputManager; }
+    public Timer GetTimer() { return m_timer; }
+    //public Grid<int> GetGridForPathFinding() { return m_AStar_Grid; }
 
     public void SetNewInputDevice(InputDevice aInputDevice) { m_inputManager.ClearInputDevices(); m_inputManager.AddInputDevice(aInputDevice); }
     public void AddInputDevice(InputDevice aInputDevice) { m_inputManager.AddInputDevice(aInputDevice); }
+
 }
 

@@ -17,7 +17,7 @@ public class BaseCamera : MonoBehaviour
     }
     private void RegisterToCameraManager()
     {
-        CameraManager cameraManager = GameManager.GetCameraManager();
+        CameraManager cameraManager = GameManager.instance.GetCameraManager();
         cameraManager.RegisterCamera(this);
     }
 

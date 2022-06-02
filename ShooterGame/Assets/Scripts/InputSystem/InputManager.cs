@@ -12,7 +12,7 @@ public class InputManager
     public InputManager()
     {
         m_inputDevices=new List<InputDevice>();
-        GameManager.GetEventManager().SubscribeToEvent(ToggleInputEvent.EventType(), HandleToggleInputEvent);
+        GameManager.instance.GetEventManager().SubscribeToEvent(ToggleInputEvent.EventType(), HandleToggleInputEvent);
     }
 
     public void Update()

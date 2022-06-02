@@ -12,7 +12,7 @@ public class PlayerController
         m_owner = aOwner;
         m_camera = aCamera;
 
-        m_eventManager = GameManager.GetEventManager();
+        m_eventManager = GameManager.instance.GetEventManager();
         m_eventManager.SubscribeToEvent(InputEvent.EventType(), HandleInputEvent);
         m_eventManager.SubscribeToEvent(AxisInputEvent.EventType(), HandleAxisInputEvent);
     }

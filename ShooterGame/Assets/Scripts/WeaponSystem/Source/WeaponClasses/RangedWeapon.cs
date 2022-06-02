@@ -69,7 +69,7 @@ public class RangedWeapon : WeaponBase
 
         projectileObj.GetComponent<Projectile>().Initzialize(aWeaponHitResult.GetHitPosition(), aWeaponHitResult.GetHitDirection(), GetDamageAmount());
         //projectileObj.GetComponent<Projectile>().m_projectileFXData=m_
-        GameManager.GetTimer().TimedExecution(DeactivateProjetile,0.1f);
+        GameManager.instance.GetTimer().TimedExecution(DeactivateProjetile,0.1f);
     }
 
     public void DeactivateProjetile()
