@@ -3,8 +3,8 @@ namespace Sahil
 {
     public class Cell
     {
-        Vector3 m_worldPosition;
-        Vector2Int m_gridPosition;
+        protected Vector3 m_worldPosition;
+        protected Vector2Int m_gridPosition;
 
         public virtual void Initialize(Vector2Int aGridPosition, Vector3 aWorldPosition)
         {

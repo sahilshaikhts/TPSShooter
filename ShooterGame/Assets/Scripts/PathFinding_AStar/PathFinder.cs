@@ -5,30 +5,30 @@ namespace Sahil.AStar
 {
     public class PathFinder
     {
-        AStar_Grid m_grid;//instead of storing it,make this a static class ,make em pass the grid to the static function,and return list of positions.
+        Grid_AStar m_grid;//instead of storing it,make this a static class ,make em pass the grid to the static function,and return list of positions.
 
         Vector3[] m_cachedPath;
         List<Vector3> m_nextPath;
 
-        public PathFinder(AStar_Grid aGrid)
+        public PathFinder(Grid_AStar aGrid)
         {
             m_grid = aGrid;
         }
 
-        public List<Cell> CalculatePath(Vector3 aOrigin, Vector3 aTargetPosition)
+        public List<Cell_AStar> CalculatePath(Vector3 aOrigin, Vector3 aTargetPosition)
         {
-            Cell originCell = m_grid.NodeFromWorldPoint(aOrigin);
-            Cell targetCell = m_grid.NodeFromWorldPoint(aTargetPosition);
+            Cell_AStar originCell = m_grid.GetCellFromWorldPosition(aOrigin);
+            Cell_AStar targetCell = m_grid.GetCellFromWorldPosition(aTargetPosition);
 
-            HashSet<Cell> vistiedCells = new HashSet<Cell>();
-            List<Cell> openCells = new List<Cell>();
+            HashSet<Cell_AStar> vistiedCells = new HashSet<Cell_AStar>();
+            List<Cell_AStar> openCells = new List<Cell_AStar>();
 
             m_nextPath = new List<Vector3>();
 
             openCells.Add(originCell);
             while (openCells.Count > 0)
             {
-                Cell currentCell = openCells[0];
+                Cell_AStar currentCell = openCells[0];
 
                 for (int i = 1; i < openCells.Count; i++)
                 {
@@ -46,7 +46,7 @@ namespace Sahil.AStar
                     return GetPath(currentCell, originCell);
                 }
 
-                foreach (Cell neighbour in m_grid.GetNeighbours(currentCell))
+                foreach (Cell_AStar neighbour in m_grid.GetNeighbours(currentCell))
                 {
                     if (neighbour.IsWalkable() == false && vistiedCells.Contains(neighbour)) continue;
 
@@ -66,10 +66,10 @@ namespace Sahil.AStar
             return null;
         }
 
-        List<Cell> GetPath(Cell aStartCell, Cell aEndCell)
+        List<Cell_AStar> GetPath(Cell_AStar aStartCell, Cell_AStar aEndCell)
         {
-            List<Cell> path = new List<Cell>();
-            Cell cellToCheck = aEndCell;
+            List<Cell_AStar> path = new List<Cell_AStar>();
+            Cell_AStar cellToCheck = aEndCell;
 
             while (cellToCheck != aStartCell)
             {

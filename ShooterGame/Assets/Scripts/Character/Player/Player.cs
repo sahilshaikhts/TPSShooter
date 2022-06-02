@@ -16,7 +16,6 @@ public class Player : Character,IShotable
     [SerializeField]WeaponBase tmp_pistol;
     [SerializeField]LayerMask m_weaponLayerMask;
     [SerializeField]Texture tmp_crosshair;
-        System.Collections.Generic.List<Cell> path;
     void Start()
     {
         m_playerController = new PlayerController(gameObject,GameManager.instance.GetCameraManager().GetCamera("PlayerFollowCamera").gameObject);
@@ -30,9 +29,6 @@ public class Player : Character,IShotable
 
         WeaponBase pistol = Instantiate(tmp_pistol);
         m_weaponHolder.AddNewWeapon(pistol);
-    }
-    private void Update()
-    {
     }
 
     void HandleJumpEvent(IEvent aEvent) 
@@ -83,12 +79,12 @@ public class Player : Character,IShotable
         //pos = GameManager.instance.GetGridForPathFinding().NodeFromWorldPoint(target.transform.position).GetWorldPosition();
         //Gizmos.DrawCube(pos, Vector3.one);
 
-        if (path == null) return;
-        for (int j = 0; j < path.Count; j++)
-        {
-            Gizmos.color = Color.black;
-            Gizmos.DrawCube(path[j].GetWorldPosition() + Vector3.up * .6f, Vector3.one * 2);
-        }
+        //if (path == null) return;
+        //for (int j = 0; j < path.Count; j++)
+        //{
+        //    Gizmos.color = Color.black;
+        //    Gizmos.DrawCube(path[j].GetWorldPosition() + Vector3.up * .6f, Vector3.one * 2);
+        //}
     }
 
     public void HandleGettingShot(Vector3 projetileDirection, int damageAmount)

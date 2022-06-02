@@ -3,12 +3,12 @@ namespace Sahil
 {
 	public class Grid<T> where T :Cell , new()
 	{
-		T[,] grid;
+		protected T[,] grid;
 
-		[SerializeField] Vector3 m_gridOrigin;
-		[SerializeField] float m_cellSize;
+		[SerializeField] protected Vector3 m_gridOrigin;
+		[SerializeField] protected float m_cellSize;
 
-		Vector2Int m_gridSize;
+		protected Vector2Int m_gridSize;
 
 		///<summary>
 		/// GridOrigin:Bottom-Left cell's world position

@@ -91,7 +91,8 @@
     <Compile Include="Assets\Scripts\WeaponSystem\Source\WeaponClasses\RangedWeapon.cs" />
     <Compile Include="Assets\Scripts\PathFinding_AStar\PathFinder.cs" />
     <Compile Include="Assets\Scripts\BehaviourTree\Source\Selector.cs" />
-    <Compile Include="Assets\Scripts\PathFinding_AStar\AStarCell.cs" />
+    <Compile Include="Assets\Scripts\PathFinding_AStar\Cell_AStar.cs" />
+    <Compile Include="Assets\Scripts\PathFinding_AStar\Grid_AStar.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
