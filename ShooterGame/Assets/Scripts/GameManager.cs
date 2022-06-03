@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     InputManager m_inputManager;
     Timer m_timer;
 
-    //[SerializeField] AStar_Grid m_AStar_Grid;
+    [SerializeField] Grid_AStar m_AStar_Grid;
 
     [SerializeField] public InputDevice tmp_inputDevice;//tmp
 
@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
         m_inputManager = new InputManager();
         m_timer=new Timer();
 
-        //m_AStar_Grid.CreateGrid();
+        m_AStar_Grid.CreateGrid();
 
         //TODO: this should be loaded from saved file from disk ,not scirptableobject
         AddInputDevice((InputDevice)tmp_inputDevice);
@@ -44,10 +44,24 @@ public class GameManager : MonoBehaviour
     public EventManager GetEventManager() { return m_eventManager; }
     public InputManager GetInputManager() { return m_inputManager; }
     public Timer GetTimer() { return m_timer; }
-    //public Grid<int> GetGridForPathFinding() { return m_AStar_Grid; }
+    public Grid_AStar GetGridForPathFinding() { return m_AStar_Grid; }
 
     public void SetNewInputDevice(InputDevice aInputDevice) { m_inputManager.ClearInputDevices(); m_inputManager.AddInputDevice(aInputDevice); }
     public void AddInputDevice(InputDevice aInputDevice) { m_inputManager.AddInputDevice(aInputDevice); }
 
+
+
+    private void OnDrawGizmos()
+    {
+        if (m_AStar_Grid == null && m_AStar_Grid.m_grid == null) return;
+
+
+        for (int x = 0; x < m_AStar_Grid.m_grid.GetLength(0); x++)
+        for (int y = 0; y < m_AStar_Grid.m_grid.GetLength(1); y++)
+        {
+            Gizmos.color = new Color(1,1,1,.6f);
+            Gizmos.DrawCube(m_AStar_Grid.m_grid[x,y].GetWorldPosition(), Vector3.one*2);
+        }
+    }
 }
 

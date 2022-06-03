@@ -72,12 +72,14 @@
     <Compile Include="Assets\Scripts\Character\Player\Controller\PlayerController.cs" />
     <Compile Include="Assets\Scripts\WeaponSystem\Source\WeaponClasses\WeponHolder.cs" />
     <Compile Include="Assets\Scripts\EventSystem\Events\AIEvents.cs" />
+    <Compile Include="Assets\Scripts\PathFinding_AStar\Cell_AStar.cs" />
     <Compile Include="Assets\Scripts\ObjectPool\ObjectPool.cs" />
     <Compile Include="Assets\Scripts\CustomComponent\MovementComponent.cs" />
     <Compile Include="Assets\Scripts\BehaviourTree\Source\BehaviourTree.cs" />
     <Compile Include="Assets\Scripts\WeaponSystem\Source\WeaponClasses\Base\WeaponBase.cs" />
     <Compile Include="Assets\Scripts\BehaviourTree\MoveTowards.cs" />
     <Compile Include="Assets\Scripts\BehaviourTree\Source\Sequence.cs" />
+    <Compile Include="Assets\Scripts\PathFinding_AStar\Grid_AStar.cs" />
     <Compile Include="Assets\Scripts\WeaponSystem\Source\WeaponClasses\Base\WeaponHolderBase.cs" />
     <Compile Include="Assets\Scripts\Utilities\Timer.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
@@ -91,8 +93,6 @@
     <Compile Include="Assets\Scripts\WeaponSystem\Source\WeaponClasses\RangedWeapon.cs" />
     <Compile Include="Assets\Scripts\PathFinding_AStar\PathFinder.cs" />
     <Compile Include="Assets\Scripts\BehaviourTree\Source\Selector.cs" />
-    <Compile Include="Assets\Scripts\PathFinding_AStar\Cell_AStar.cs" />
-    <Compile Include="Assets\Scripts\PathFinding_AStar\Grid_AStar.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

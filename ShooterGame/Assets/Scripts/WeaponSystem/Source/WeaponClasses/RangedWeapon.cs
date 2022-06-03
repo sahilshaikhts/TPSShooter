@@ -27,7 +27,7 @@ public class RangedWeapon : WeaponBase
 
         GameObject.Destroy(projectileObj);
     }
-    public void DeductAmmo() { m_ammo -= 1;Debug.Log(m_ammo); }
+    public void DeductAmmo() { m_ammo -= 1; }
     public void SetAmmo(int amount) { m_ammo = Mathf.Clamp( amount,0, m_clipSize); }
 
     public int GetAmmo() { return m_ammo; }
@@ -55,7 +55,6 @@ public class RangedWeapon : WeaponBase
 
                 DeductAmmo();
             }
-            Debug.Log("fIRE");
         }
         else
         {

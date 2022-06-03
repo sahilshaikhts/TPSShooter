@@ -1,14 +1,16 @@
 using UnityEngine;
 namespace Sahil
 {
+	[System.Serializable]
 	public class Grid<T> where T :Cell , new()
 	{
-		protected T[,] grid;
+		public T[,] m_grid;
 
 		[SerializeField] protected Vector3 m_gridOrigin;
+		[SerializeField] protected Vector2Int m_gridSize;
+
 		[SerializeField] protected float m_cellSize;
 
-		protected Vector2Int m_gridSize;
 
 		///<summary>
 		/// GridOrigin:Bottom-Left cell's world position
@@ -25,27 +27,36 @@ namespace Sahil
 
 		public virtual T[,] CreateGrid()
 		{
-			grid = new T[m_gridSize.x, m_gridSize.y];
+			m_grid = new T[m_gridSize.x, m_gridSize.y];
 
 			for (int x = 0; x < m_gridSize.x; x++)
 			{
 				for (int y = 0; y < m_gridSize.y; y++)
 				{
 					Vector3 wPosition = m_gridOrigin+new Vector3(x,0,y)*m_cellSize;
-					grid[x, y]=new T();
+					m_grid[x, y]=new T();
 
-					grid[x,y].Initialize(new Vector2Int(x, y), wPosition);
+					m_grid[x,y].Initialize(new Vector2Int(x, y), wPosition);
 				}
 			}
-			return grid;
+			return m_grid;
 		}
  
 		public T GetCellFromWorldPosition(Vector3 aWorldPosition)
 		{
-			Vector3 localPos=new Vector3(aWorldPosition.x,aWorldPosition.y,aWorldPosition.z)- m_gridOrigin;
-			//return grid[x, y];
-			return null;
+			Vector3 localPos=new Vector3(aWorldPosition.x,aWorldPosition.y,aWorldPosition.z) - m_gridOrigin;
+			return m_grid[Mathf.RoundToInt(localPos.x / m_cellSize), Mathf.RoundToInt(localPos.z / m_cellSize)];
+
 		}
+
+		protected T GetCellIfValid(Vector2Int aGridPosition)
+        {
+			if (aGridPosition.x < m_gridSize.x && aGridPosition.y < m_gridSize.y && aGridPosition.x >=0 && aGridPosition.y >=0)
+			{
+				return m_grid[aGridPosition.x, aGridPosition.y];
+			}
+			else return null;
+        }
 
 	}
 }

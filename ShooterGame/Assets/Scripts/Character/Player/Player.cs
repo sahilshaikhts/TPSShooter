@@ -3,6 +3,7 @@ using CameraSystem;
 using UnityEngine;
 using WeaponSystem;
 using Sahil.AStar;
+using System.Collections.Generic;
 
 namespace ShootingGame
 {
@@ -11,8 +12,11 @@ public class Player : Character,IShotable
     public Transform target;
     PlayerController m_playerController;
     MovementComponent m_movementComponent;
+
     WeaponHolder m_weaponHolder;
 
+    PathFinder m_pathFinder;
+        List<Cell_AStar> path;
     [SerializeField]WeaponBase tmp_pistol;
     [SerializeField]LayerMask m_weaponLayerMask;
     [SerializeField]Texture tmp_crosshair;
@@ -21,6 +25,7 @@ public class Player : Character,IShotable
         m_playerController = new PlayerController(gameObject,GameManager.instance.GetCameraManager().GetCamera("PlayerFollowCamera").gameObject);
         m_movementComponent = GetComponent<MovementComponent>();
         m_weaponHolder = new WeaponHolder(m_weaponLayerMask);
+        m_pathFinder = new PathFinder(GameManager.instance.GetGridForPathFinding());
 
         GameManager.instance.GetEventManager().SubscribeToEvent(MoveEvent.EventType(), HandleMoveEvent);
         GameManager.instance.GetEventManager().SubscribeToEvent(JumpEvent.EventType(), HandleJumpEvent);
@@ -29,6 +34,11 @@ public class Player : Character,IShotable
 
         WeaponBase pistol = Instantiate(tmp_pistol);
         m_weaponHolder.AddNewWeapon(pistol);
+    }
+
+    private void Update()
+    {
+        //path = m_pathFinder.CalculatePath(transform.position, target.position);
     }
 
     void HandleJumpEvent(IEvent aEvent) 
@@ -73,18 +83,20 @@ public class Player : Character,IShotable
 
     private void OnDrawGizmos()
     {
-        //Gizmos.color = Color.red;
-        //Vector3 pos = GameManager.instance.GetGridForPathFinding().NodeFromWorldPoint(transform.position).GetWorldPosition();
-        //Gizmos.DrawCube(pos, Vector3.one*10);
-        //pos = GameManager.instance.GetGridForPathFinding().NodeFromWorldPoint(target.transform.position).GetWorldPosition();
-        //Gizmos.DrawCube(pos, Vector3.one);
+        if (GameManager.instance.GetGridForPathFinding() == null) return;
+        Gizmos.color = Color.green;
+        Vector3 pos = GameManager.instance.GetGridForPathFinding().GetCellFromWorldPosition(transform.position).GetWorldPosition();
+        Gizmos.DrawCube(pos+Vector3.up * .3f, Vector3.one * 2);
+        Gizmos.color = Color.red;
+        pos = GameManager.instance.GetGridForPathFinding().GetCellFromWorldPosition(target.transform.position).GetWorldPosition();
+        Gizmos.DrawCube(pos+Vector3.up*.3f, Vector3.one*2);
 
-        //if (path == null) return;
-        //for (int j = 0; j < path.Count; j++)
-        //{
-        //    Gizmos.color = Color.black;
-        //    Gizmos.DrawCube(path[j].GetWorldPosition() + Vector3.up * .6f, Vector3.one * 2);
-        //}
+        if (path == null) return;
+        for (int j = 0; j < path.Count; j++)
+        {
+            Gizmos.color = Color.black;
+            Gizmos.DrawCube(path[j].GetWorldPosition() + Vector3.up * .6f, Vector3.one * 2);
+        }
     }
 
     public void HandleGettingShot(Vector3 projetileDirection, int damageAmount)
