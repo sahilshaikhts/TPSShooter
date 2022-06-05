@@ -1,21 +1,21 @@
 using Behaviourtree;
 using UnityEngine;
 
-public class EnemyAI : BehaviourTree
+public class BT_luminousCentaurs : BehaviourTree
 {
-    [SerializeField]Transform m_playerTransform;
+    [SerializeField] Transform m_playerTransform;
 
     public void Start()
     {
         InitializeBlackBoard();
-        //MoveInRange
-        Sequence moveInRange = new Sequence(this);
-        m_root = moveInRange;
+        //MoveIfInRange
+        Sequence moveIfInRange = new Sequence(this);
+        m_root = moveIfInRange;
         IsWithinRange withingRangeNode = new IsWithinRange(this, "SelfPosition", "TargetPostion");
         MoveTowards moveTowardsNode = new MoveTowards(this, "ownerTransform","TargetPostion");
 
-        moveInRange.AddChildNode(withingRangeNode);
-        moveInRange.AddChildNode(moveTowardsNode);
+        moveIfInRange.AddChildNode(withingRangeNode);
+        moveIfInRange.AddChildNode(moveTowardsNode);
     }
 
     void InitializeBlackBoard()

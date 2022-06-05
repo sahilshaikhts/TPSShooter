@@ -59,7 +59,10 @@ public class GameManager : MonoBehaviour
         for (int x = 0; x < m_AStar_Grid.m_grid.GetLength(0); x++)
         for (int y = 0; y < m_AStar_Grid.m_grid.GetLength(1); y++)
         {
-            Gizmos.color = new Color(1,1,1,.6f);
+                if (m_AStar_Grid.m_grid[x, y].IsWalkable())
+                    Gizmos.color = new Color(1, 1, 1, .6f);
+                else
+                    Gizmos.color = Color.red;
             Gizmos.DrawCube(m_AStar_Grid.m_grid[x,y].GetWorldPosition(), Vector3.one*2);
         }
     }

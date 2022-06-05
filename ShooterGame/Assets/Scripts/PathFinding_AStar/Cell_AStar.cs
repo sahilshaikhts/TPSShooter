@@ -7,7 +7,7 @@ namespace Sahil.AStar
 
         public int HCost, GCost;
         public int FCost { get { return HCost + GCost; } }
-        bool m_isWalkable=true;
+        bool m_isWalkable;
 
         public void Initialize(Vector2Int aGridPosition, Vector3 aWorldPosition, bool aIsWalkable)
         {
@@ -16,6 +16,6 @@ namespace Sahil.AStar
             m_isWalkable = aIsWalkable;
         }
 
-        public bool IsWalkable() { return true; }
+        public bool IsWalkable() { return m_isWalkable; }
     }
 }

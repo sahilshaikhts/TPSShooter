@@ -497,7 +497,7 @@ GameObject:
   - component: {fileID: 61701226}
   - component: {fileID: 61701225}
   - component: {fileID: 61701224}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tree_02 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -964,16 +964,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 475e6e7d6e519e9489d5a3c5c9c78f50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_characterFeet: {fileID: 439123533}
   LookTowardsMovementDirection: 1
   m_speed: 10
   m_maxSpeed: 10
   m_jumpSpeed: 20
   m_gravityAccelaration: -10
+  m_turnSpeed: 0
   m_friction: 15
   m_jumpGroundCheckMask:
     serializedVersion: 2
     m_Bits: 64
+  m_characterFeet: {fileID: 439123533}
   onGround: 0
 --- !u!54 &127738580
 Rigidbody:
@@ -1120,6 +1121,9 @@ MonoBehaviour:
     m_gridOrigin: {x: 9.8, y: 0, z: -55}
     m_gridSize: {x: 40, y: 40}
     m_cellSize: 2
+    m_unWalkableMask:
+      serializedVersion: 2
+      m_Bits: 256
   tmp_inputDevice:
     m_keyBindings:
       InputDeviceType: 1
@@ -1690,7 +1694,7 @@ GameObject:
   - component: {fileID: 283590044}
   - component: {fileID: 283590043}
   - component: {fileID: 283590042}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Rock_03 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2067,7 +2071,7 @@ GameObject:
   - component: {fileID: 359883615}
   - component: {fileID: 359883614}
   - component: {fileID: 359883613}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Rock_02 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3504,7 +3508,7 @@ GameObject:
   - component: {fileID: 569222073}
   - component: {fileID: 569222072}
   - component: {fileID: 569222071}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tree_02 (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3687,7 +3691,7 @@ GameObject:
   - component: {fileID: 585689976}
   - component: {fileID: 585689975}
   - component: {fileID: 585689974}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tree_02 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5939,7 +5943,7 @@ GameObject:
   - component: {fileID: 1053312760}
   - component: {fileID: 1053312759}
   - component: {fileID: 1053312758}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Rock_04 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6135,7 +6139,7 @@ GameObject:
   - component: {fileID: 1101713000}
   - component: {fileID: 1101712999}
   - component: {fileID: 1101712998}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Rock_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6571,16 +6575,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 475e6e7d6e519e9489d5a3c5c9c78f50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_characterFeet: {fileID: 197554204}
   LookTowardsMovementDirection: 0
   m_speed: 20
   m_maxSpeed: 10
   m_jumpSpeed: 10
   m_gravityAccelaration: -10
+  m_turnSpeed: 8
   m_friction: 10
   m_jumpGroundCheckMask:
     serializedVersion: 2
     m_Bits: 64
+  m_characterFeet: {fileID: 197554204}
   onGround: 0
 --- !u!54 &1150184842
 Rigidbody:
@@ -6722,7 +6727,7 @@ GameObject:
   - component: {fileID: 1156402538}
   - component: {fileID: 1156402537}
   - component: {fileID: 1156402536}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tree_03 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6918,7 +6923,7 @@ GameObject:
   - component: {fileID: 1253580900}
   - component: {fileID: 1253580899}
   - component: {fileID: 1253580898}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tree_02 (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7853,7 +7858,7 @@ GameObject:
   - component: {fileID: 1420721901}
   - component: {fileID: 1420721900}
   - component: {fileID: 1420721899}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tree_03 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8034,7 +8039,7 @@ GameObject:
   - component: {fileID: 1431278315}
   - component: {fileID: 1431278314}
   - component: {fileID: 1431278313}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tree_02 (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8820,7 +8825,7 @@ GameObject:
   - component: {fileID: 1731540837}
   - component: {fileID: 1731540836}
   - component: {fileID: 1731540835}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tree_03 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8918,7 +8923,7 @@ GameObject:
   - component: {fileID: 1752258023}
   - component: {fileID: 1752258022}
   - component: {fileID: 1752258021}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tree_02 (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9868,7 +9873,7 @@ GameObject:
   - component: {fileID: 1953464161}
   - component: {fileID: 1953464160}
   - component: {fileID: 1953464159}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Rock_03 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9966,7 +9971,7 @@ GameObject:
   - component: {fileID: 1960782365}
   - component: {fileID: 1960782364}
   - component: {fileID: 1960782363}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tree_03 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10064,7 +10069,7 @@ GameObject:
   - component: {fileID: 1986176833}
   - component: {fileID: 1986176832}
   - component: {fileID: 1986176831}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tree_02 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10162,7 +10167,7 @@ GameObject:
   - component: {fileID: 1992139975}
   - component: {fileID: 1992139974}
   - component: {fileID: 1992139973}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Rock_03 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10358,7 +10363,7 @@ GameObject:
   - component: {fileID: 2046025771}
   - component: {fileID: 2046025770}
   - component: {fileID: 2046025769}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tree_02 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10721,7 +10726,7 @@ GameObject:
   - component: {fileID: 2137134727}
   - component: {fileID: 2137134726}
   - component: {fileID: 2137134725}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tree_02 (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

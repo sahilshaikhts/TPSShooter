@@ -5,7 +5,8 @@ namespace Sahil.AStar
 	[System.Serializable]
 	public class Grid_AStar:Grid<Cell_AStar>
 	{
-		LayerMask m_unWalkableMask;
+		[SerializeField]LayerMask m_unWalkableMask;
+
 		///<summary>
 		/// GridOrigin:Bottom-Left cell's world position
 		/// GridSize: Number of cells in each coordinate
@@ -25,8 +26,8 @@ namespace Sahil.AStar
 				{
 					Vector3 wPosition = m_gridOrigin+new Vector3(x,0,y)*m_cellSize;
 					m_grid[x, y]=new Cell_AStar();
-
-					m_grid[x,y].Initialize(new Vector2Int(x, y), wPosition);
+					bool walkable=!Physics.CheckSphere(wPosition,m_cellSize/2,m_unWalkableMask);
+					m_grid[x,y].Initialize(new Vector2Int(x, y), wPosition, walkable);
 				}
 			}
 			return m_grid;
@@ -35,11 +36,14 @@ namespace Sahil.AStar
 		public List<Cell_AStar> GetNeighbours(Cell_AStar aCell)
         {
 			List<Cell_AStar> neighbours = new List<Cell_AStar>();
-			for(int x=-1;x<1;x++)
+			for(int x=-1;x<=1;x++)
             {
-				for(int y=-1;y<1;y++)
+				for(int y=-1;y<=1;y++)
                 {
-					Cell_AStar cell=GetCellIfValid(new Vector2Int(x, y));
+					if (x == 0 && y == 0) continue;
+
+					Cell_AStar cell=GetCellIfValid(aCell.GetGridPosition()+new Vector2Int(x, y));
+
 					if(cell!=null)
 						neighbours.Add(cell);
                 }

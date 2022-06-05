@@ -5,7 +5,7 @@ using WeaponSystem;
 
 namespace ShootingGame
 {
-public class Enemy : Character, IShotable
+public class Enm_luminousCentaurs : Character, IShotable
 {
     MovementComponent m_movementComponent;
     private void Start()

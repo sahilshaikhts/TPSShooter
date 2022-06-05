@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class MovementComponent : MonoBehaviour
 {
+   
     private GameObject m_owner;
 
     private Rigidbody m_owner_rigidbody;
@@ -10,19 +11,18 @@ public class MovementComponent : MonoBehaviour
     private Vector3 m_velocity;
     private Vector3 m_additionalForce;
     private Vector3 m_additionalRotationDirection;
-
-    [SerializeField] private Transform m_characterFeet;
-
-    [SerializeField] bool LookTowardsMovementDirection=false;
+    [SerializeField] bool LookTowardsMovementDirection = false;
 
     [SerializeField] private float m_speed, m_maxSpeed;
     [SerializeField] private float m_jumpSpeed;
 
     [SerializeField] private float m_gravityAccelaration;
+    [SerializeField] private float m_turnSpeed;
     [SerializeField] private float m_friction;
 
     [SerializeField] private LayerMask m_jumpGroundCheckMask;
 
+    [SerializeField]private Transform m_characterFeet;
     private bool doJump = false;
     [SerializeField]private bool onGround;
 
@@ -34,6 +34,8 @@ public class MovementComponent : MonoBehaviour
         m_owner_rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
 
         m_velocity = Vector3.zero;
+
+        if (m_characterFeet == null) Debug.LogError("Assign a transform of character's Feet");
     }
 
     private void Update()
@@ -80,11 +82,11 @@ public class MovementComponent : MonoBehaviour
 
             if (Vector3.Dot(velAlongMoveDir, movDirection) > 0.0f)
             {
-                newVelocity = Vector3.Lerp(newVelocity, velAlongMoveDir, m_friction * Time.fixedDeltaTime);
+                newVelocity = Vector3.Lerp(newVelocity, velAlongMoveDir, m_turnSpeed * Time.fixedDeltaTime);
             }
             else
             {
-                newVelocity = Vector3.Lerp(newVelocity, Vector3.zero, m_friction * Time.fixedDeltaTime);
+                newVelocity = Vector3.Lerp(newVelocity, Vector3.zero, m_turnSpeed * Time.fixedDeltaTime);
             }
             movDirection *= m_speed;
 
@@ -94,15 +96,15 @@ public class MovementComponent : MonoBehaviour
             m_inputDirection = Vector3.zero;
 
             m_velocity = newVelocity;
-            if (LookTowardsMovementDirection)
-            {
-                Vector3 facingDirection = m_velocity.normalized;
-                facingDirection.Normalize();
-                facingDirection.y = 0;
+        if (LookTowardsMovementDirection)
+        {
+            Vector3 facingDirection = m_velocity.normalized;
+            facingDirection.Normalize();
+            facingDirection.y = 0;
 
-                if (m_owner_rigidbody.velocity.magnitude > 0.1f)
-                    RotateTowards(facingDirection);
-            }
+            if (m_owner_rigidbody.velocity.magnitude > 0.1f)
+                RotateTowards(facingDirection);
+        }
         }
         else Friction();
 
@@ -116,7 +118,7 @@ public class MovementComponent : MonoBehaviour
 
         ApplyVelocity();
 
-
+        
 
         if (m_additionalRotationDirection.sqrMagnitude > 0)
         {
@@ -136,6 +138,11 @@ public class MovementComponent : MonoBehaviour
         m_owner_rigidbody.AddForce(velocityDiff, ForceMode.VelocityChange);
     }
 
+    public void StopMovement()
+    {
+        m_owner_rigidbody.velocity=Vector3.zero;
+    }
+
     void PerformJump()
     {
         if (onGround)
@@ -150,35 +157,25 @@ public class MovementComponent : MonoBehaviour
     {
         Ray ray = new Ray(m_characterFeet.position, Vector3.down);
 
-        RaycastHit[] hitInfos = Physics.SphereCastAll(ray.origin, 0.1f, ray.direction, m_characterFeet.localPosition.y+0.1f, m_jumpGroundCheckMask);
-
-        if (hitInfos.Length > 0)
+        if (Physics.Raycast(ray, 0.5f, m_jumpGroundCheckMask))
+        {
             return true;
-
+        }
         return false;
     }
 
     private Vector3 GetGroundNormal()
     {
-        Vector3 normal = Vector3.zero;
-        RaycastHit hit = new RaycastHit();
-
         Ray ray = new Ray(m_characterFeet.position, Vector3.down);
 
-        RaycastHit[] hitInfos = Physics.SphereCastAll(ray.origin, 0.1f, ray.direction, 2, m_jumpGroundCheckMask);
-      
-        float minGroundDist = float.MaxValue;
-        foreach (RaycastHit hitInfo in hitInfos)
+        RaycastHit hit = new RaycastHit();
+        Vector3 normal = Vector3.zero;
+
+        if (Physics.Raycast(ray, out hit, 2f, m_jumpGroundCheckMask))
         {
-            if (hitInfo.distance < minGroundDist)
-            {
-                minGroundDist = hitInfo.distance;
-                hit = hitInfo;
-                normal = hit.normal;
-            }
+            normal = hit.normal;
         }
         return normal;
-
     }
 
     public void SetMovementDirection(Vector3 direction)
@@ -186,7 +183,7 @@ public class MovementComponent : MonoBehaviour
         m_inputDirection += direction;
         m_inputDirection.Normalize();
     }
-
+    public Vector3 GetMovementDirection() { return m_inputDirection; }
     public void AddRotation(Vector3 direction)
     {
         m_additionalRotationDirection = direction;
@@ -198,10 +195,10 @@ public class MovementComponent : MonoBehaviour
 
         m_owner_rigidbody.rotation = Quaternion.LookRotation(direction);
     }
-  
+
     public void ApplyForce(Vector3 direction, float force)
     {
-        m_additionalForce += direction * force; 
+        m_additionalForce += direction * force;
     }
 
     public void Jump() { doJump = true; }

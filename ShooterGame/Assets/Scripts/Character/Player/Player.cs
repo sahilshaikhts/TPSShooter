@@ -15,17 +15,15 @@ public class Player : Character,IShotable
 
     WeaponHolder m_weaponHolder;
 
-    PathFinder m_pathFinder;
-        List<Cell_AStar> path;
     [SerializeField]WeaponBase tmp_pistol;
     [SerializeField]LayerMask m_weaponLayerMask;
     [SerializeField]Texture tmp_crosshair;
+
     void Start()
     {
         m_playerController = new PlayerController(gameObject,GameManager.instance.GetCameraManager().GetCamera("PlayerFollowCamera").gameObject);
         m_movementComponent = GetComponent<MovementComponent>();
         m_weaponHolder = new WeaponHolder(m_weaponLayerMask);
-        m_pathFinder = new PathFinder(GameManager.instance.GetGridForPathFinding());
 
         GameManager.instance.GetEventManager().SubscribeToEvent(MoveEvent.EventType(), HandleMoveEvent);
         GameManager.instance.GetEventManager().SubscribeToEvent(JumpEvent.EventType(), HandleJumpEvent);
@@ -36,10 +34,6 @@ public class Player : Character,IShotable
         m_weaponHolder.AddNewWeapon(pistol);
     }
 
-    private void Update()
-    {
-        //path = m_pathFinder.CalculatePath(transform.position, target.position);
-    }
 
     void HandleJumpEvent(IEvent aEvent) 
     {
@@ -81,23 +75,23 @@ public class Player : Character,IShotable
         GUI.DrawTexture(new Rect(Screen.width / 2, Screen.height / 2, 4, 4), tmp_crosshair);
     }
 
-    private void OnDrawGizmos()
-    {
-        if (GameManager.instance.GetGridForPathFinding() == null) return;
-        Gizmos.color = Color.green;
-        Vector3 pos = GameManager.instance.GetGridForPathFinding().GetCellFromWorldPosition(transform.position).GetWorldPosition();
-        Gizmos.DrawCube(pos+Vector3.up * .3f, Vector3.one * 2);
-        Gizmos.color = Color.red;
-        pos = GameManager.instance.GetGridForPathFinding().GetCellFromWorldPosition(target.transform.position).GetWorldPosition();
-        Gizmos.DrawCube(pos+Vector3.up*.3f, Vector3.one*2);
+    //private void OnDrawGizmos()
+    //{
+    //    if (GameManager.instance.GetGridForPathFinding() == null) return;
+    //    Gizmos.color = Color.green;
+    //    Vector3 pos = GameManager.instance.GetGridForPathFinding().GetCellFromWorldPosition(transform.position).GetWorldPosition();
+    //    Gizmos.DrawCube(pos+Vector3.up * .3f, Vector3.one * 2);
+    //    Gizmos.color = Color.red;
+    //    pos = GameManager.instance.GetGridForPathFinding().GetCellFromWorldPosition(target.transform.position).GetWorldPosition();
+    //    Gizmos.DrawCube(pos+Vector3.up*.3f, Vector3.one*2);
 
-        if (path == null) return;
-        for (int j = 0; j < path.Count; j++)
-        {
-            Gizmos.color = Color.black;
-            Gizmos.DrawCube(path[j].GetWorldPosition() + Vector3.up * .6f, Vector3.one * 2);
-        }
-    }
+    //    if (path == null) return;
+    //    for (int j = 0; j < path.Count; j++)
+    //    {
+    //        Gizmos.color = Color.black;
+    //        Gizmos.DrawCube(path[j].GetWorldPosition() + Vector3.up * .6f, Vector3.one * 2);
+    //    }
+    //}
 
     public void HandleGettingShot(Vector3 projetileDirection, int damageAmount)
     {
