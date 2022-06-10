@@ -23,7 +23,7 @@ public class IsWithinRange : Node
             Vector3 position = (Vector3)m_tree.GetData(key_ownerPosition);
             Vector3 targetPosition = (Vector3)m_tree.GetData(key_targetPosition);
 
-            if (Vector3.Distance(position, targetPosition) < distance)
+            if (Vector3.SqrMagnitude(position-targetPosition) < distance*distance)
                 return NodeState.Sucessful;
         }
         return NodeState.Running;

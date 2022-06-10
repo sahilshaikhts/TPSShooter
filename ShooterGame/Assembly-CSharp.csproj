@@ -93,6 +93,9 @@
     <Compile Include="Assets\Scripts\WeaponSystem\Source\WeaponClasses\RangedWeapon.cs" />
     <Compile Include="Assets\Scripts\PathFinding_AStar\PathFinder.cs" />
     <Compile Include="Assets\Scripts\BehaviourTree\Source\Selector.cs" />
+    <Compile Include="Assets\Scripts\Enemies\CommonBehaviours\IsWithinRandomRange.cs" />
+    <Compile Include="Assets\Scripts\Enemies\CommonBehaviours\ShootTarget.cs" />
+    <Compile Include="Assets\Scripts\Enemies\CommonBehaviours\MoveInLineOfSight.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

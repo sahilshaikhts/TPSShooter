@@ -8,14 +8,22 @@ public class BT_luminousCentaurs : BehaviourTree
     public void Start()
     {
         InitializeBlackBoard();
-        //MoveIfInRange
-        Sequence moveIfInRange = new Sequence(this);
-        m_root = moveIfInRange;
-        IsWithinRange withingRangeNode = new IsWithinRange(this, "SelfPosition", "TargetPostion");
+        Sequence root=new Sequence(this);
+        m_root = root;
+
+        //MoveInRangeToShoot
+        Selector moveInRangeToShoot = new Selector(this);
+
+        IsWithinRandomRange withinRangeNode = new IsWithinRandomRange(this, "SelfPosition", "TargetPostion",40,100);
         MoveTowards moveTowardsNode = new MoveTowards(this, "ownerTransform","TargetPostion");
 
-        moveIfInRange.AddChildNode(withingRangeNode);
-        moveIfInRange.AddChildNode(moveTowardsNode);
+        //OnceInRangeShoot
+        MoveInLineOfSight
+        ShootTarget shootTarget;
+        
+        m_root.AddChildNode(moveInRangeToShoot);
+        moveInRangeToShoot.AddChildNode(moveTowardsNode);
+        moveInRangeToShoot.AddChildNode(withinRangeNode);
     }
 
     void InitializeBlackBoard()

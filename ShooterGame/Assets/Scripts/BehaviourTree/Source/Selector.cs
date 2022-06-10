@@ -12,7 +12,7 @@ public class Selector : Node
         {
             case NodeState.Sucessful:
                 m_state = NodeState.Sucessful;
-                m_currentChildIndex++;
+                m_currentChildIndex = -1;   //RESET
                 break;
             case NodeState.Failed:
                 m_state = NodeState.Failed;
