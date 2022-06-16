@@ -12,7 +12,7 @@ public class CameraInterestPoint : MonoBehaviour
 
     private void Start()
     {
-        SphereCollider collider = gameObject.AddComponent<SphereCollider>();
+        SphereCollider collider = gameObject.GetComponent<SphereCollider>();
         collider.isTrigger = true;
 
         collider.radius = m_detectionRadius;

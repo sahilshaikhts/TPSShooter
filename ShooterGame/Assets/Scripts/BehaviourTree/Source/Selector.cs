@@ -6,26 +6,23 @@ public class Selector : Node
 
     public override NodeState Execute()
     {
-        if (m_currentChildIndex == -1) m_currentChildIndex++;
-
-        switch (m_childNodes[m_currentChildIndex].Execute())
+        foreach (Node node in m_childNodes)
         {
-            case NodeState.Sucessful:
-                m_state = NodeState.Sucessful;
-                m_currentChildIndex = -1;   //RESET
-                break;
-            case NodeState.Failed:
-                m_state = NodeState.Failed;
-                m_currentChildIndex++;
-                break;
+            switch (node.Execute())
+            {
+                case NodeState.Sucessful:
+                    m_state = NodeState.Sucessful;
+                        return m_state;
+                    break;
+                case NodeState.Failed:
+                    m_state = NodeState.Failed;
+                    break;
 
-            case NodeState.Running:
-                m_state = NodeState.Running;
-                break;
-
+                case NodeState.Running:
+                    m_state = NodeState.Running;
+                    break;
+            }
         }
-        if (m_currentChildIndex >= m_childNodes.Count) m_currentChildIndex = -1;
-
         return m_state;
     }
 

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 namespace Sahil
 {
@@ -58,5 +59,40 @@ namespace Sahil
 			else return null;
         }
 
+		public List<T> GetNeighbours(T aCell)
+		{
+			List<T> neighbours = new List<T>();
+			for (int x = -1; x <= 1; x++)
+			{
+				for (int y = -1; y <= 1; y++)
+				{
+					if (x == 0 && y == 0) continue;
+
+					T cell = GetCellIfValid(aCell.GetGridPosition() + new Vector2Int(x, y));
+
+					if (cell != null)
+						neighbours.Add(cell);
+				}
+			}
+			return neighbours;
+		}
+
+		public List<T> GetNeighboursInGridRadius(T aCell,int aCellRadius)
+		{
+			List<T> neighbours = new List<T>();
+			for (int x = -aCellRadius; x <= aCellRadius; x++)
+			{
+				for (int y = -aCellRadius; y <= aCellRadius; y++)
+				{
+					if (x == 0 && y == 0) continue;
+
+					T cell = GetCellIfValid(aCell.GetGridPosition() + new Vector2Int(x, y));
+
+					if (cell != null)
+						neighbours.Add(cell);
+				}
+			}
+			return neighbours;
+		}
 	}
 }

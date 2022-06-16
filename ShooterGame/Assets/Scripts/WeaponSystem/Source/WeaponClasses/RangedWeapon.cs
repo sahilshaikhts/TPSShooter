@@ -46,7 +46,13 @@ public class RangedWeapon : WeaponBase
                     Vector3 hitDirection = hit.point - ray.origin;
                     hitDirection.Normalize();
                     weponHitResult = new WeaponHitResult(hit.transform.gameObject, hit.point, hitDirection);
-                    SpawnProjectile(weponHitResult);
+                    IShotable shotableObject=hit.transform.GetComponent<IShotable>();
+
+                    if(shotableObject != null)
+                    shotableObject.HandleGettingShot(hitDirection,GetDamageAmount());
+
+                    //ToDo: Do I really need the projectile class and spawning them??
+                    //SpawnProjectile(weponHitResult);
                 }
                 else //If shot in air 
                 {

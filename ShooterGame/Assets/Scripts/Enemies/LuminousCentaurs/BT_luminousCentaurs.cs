@@ -1,44 +1,53 @@
 using Behaviourtree;
+using ShootingGame;
 using UnityEngine;
 
 public class BT_luminousCentaurs : BehaviourTree
 {
-    [SerializeField] Transform m_playerTransform;
-
+    [SerializeField] Character m_self;
+    [SerializeField] Character m_player;
+    [SerializeField]LayerMask m_layerMask;
     public void Start()
     {
         InitializeBlackBoard();
-        Sequence root=new Sequence(this);
+        Selector root=new Selector(this);
         m_root = root;
 
-        //MoveInRangeToShoot
-        Selector moveInRangeToShoot = new Selector(this);
+        //**** TODO: Add check for if about to or being shot at ,defend or try to shoot.
 
-        IsWithinRandomRange withinRangeNode = new IsWithinRandomRange(this, "SelfPosition", "TargetPostion",40,100);
-        MoveTowards moveTowardsNode = new MoveTowards(this, "ownerTransform","TargetPostion");
-
-        //OnceInRangeShoot
-        MoveInLineOfSight
-        ShootTarget shootTarget;
+        //ShootIfInRange
+        Sequence shootIfInRange = new Sequence(this);
         
-        m_root.AddChildNode(moveInRangeToShoot);
-        moveInRangeToShoot.AddChildNode(moveTowardsNode);
-        moveInRangeToShoot.AddChildNode(withinRangeNode);
+        IsWithinRandomRange withinRangeNode = new IsWithinRandomRange(this, "SelfCharacter", "TargetCharacter", 40,100);
+
+        Sequence shootIfInSight = new Sequence(this);
+        //IfInLineOfSight
+        MoveInLineOfSight moveInLineOfSight=new MoveInLineOfSight(this, "SelfCharacter", "TargetCharacter", m_layerMask);
+
+        ShootTarget shootTarget=new ShootTarget(this, "SelfCharacter", "TargetCharacter");
+        
+
+        //MoveTowards player
+        MoveTowards moveTowardsNode = new MoveTowards(this, "SelfCharacter", "TargetCharacter");
+        
+        
+        m_root.AddChildNode(shootIfInSight);
+        shootIfInSight.AddChildNode(moveInLineOfSight);
+        shootIfInSight.AddChildNode(shootTarget);
+
+        //moveInRangeToShoot.AddChildNode(moveTowardsNode);
+        //moveInRangeToShoot.AddChildNode(withinRangeNode);
     }
 
     void InitializeBlackBoard()
     {
-        AddKey("SelfPosition");
-        AddKey("TargetPostion");
-        AddKey("ownerTransform",(Transform)this.transform);
-
+        AddKey("SelfCharacter");
+        AddKey("TargetCharacter");
+        SetData("SelfCharacter", (Character)m_self);
+        SetData("TargetCharacter", (Character)m_player);
     }
-
     private void Update()
     {
-        SetData("SelfPosition", (Vector3)transform.position);
-        SetData("TargetPostion", (Vector3)m_playerTransform.position);
-
         base.UpdateNodes();
     }
 }

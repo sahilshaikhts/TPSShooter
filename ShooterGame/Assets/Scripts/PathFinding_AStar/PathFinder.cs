@@ -62,7 +62,19 @@ namespace Sahil.AStar
             return null;
         }
 
-        List<Cell_AStar> GetPath(Cell_AStar aStartCell, Cell_AStar aEndCell)
+        public Vector3 GetMoveDirection(Vector3 aOrigin, Vector3 aTargetPosition)
+        {
+            List<Cell_AStar> path=CalculatePath(aOrigin, aTargetPosition);
+
+            if(path!=null && path.Count > 0)
+            {
+                Vector3 direction = path[0].GetWorldPosition() - aOrigin;
+                return direction.normalized;
+            }
+
+            return Vector3.zero;
+        }
+        private List<Cell_AStar> GetPath(Cell_AStar aStartCell, Cell_AStar aEndCell)
         {
             List<Cell_AStar> path = new List<Cell_AStar>();
             Cell_AStar cellToCheck = aEndCell;
@@ -77,7 +89,7 @@ namespace Sahil.AStar
             return path;
         }
 
-        public int GetDistance(Vector2Int aOrigin, Vector2Int aTarget)
+        private int GetDistance(Vector2Int aOrigin, Vector2Int aTarget)
         {
             int distX = Mathf.Abs(aOrigin.x - aTarget.x);
             int distY = Mathf.Abs(aOrigin.y - aTarget.y);
@@ -86,6 +98,20 @@ namespace Sahil.AStar
                 return 14 * distY + 10 * (distX - distY);
             else
                 return 14 * distX + 10 * (distY - distX);
+        }
+
+        public List<Vector3> GetNeightbouringCellsPosition(Vector3 aCenter,int aCellRadius)
+        {
+            List<Vector3> neighbours=new List<Vector3>();
+            List<Cell_AStar> neighbourCells= m_grid.GetNeighboursInGridRadius(m_grid.GetCellFromWorldPosition(aCenter),aCellRadius);
+
+            foreach (Cell_AStar cell in neighbourCells)
+            {
+                neighbours.Add(cell.GetWorldPosition());
+            }
+
+            return neighbours;
+
         }
     }
 }

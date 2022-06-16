@@ -32,6 +32,7 @@ public abstract class WeaponHolderBase
 
     public void AddNewWeapon(WeaponBase aNewweapon)
     {
+            //Todo: Add check to avoid duplication and instantiate new instance of weapon
         m_weapons.Add(aNewweapon);
     }
 }

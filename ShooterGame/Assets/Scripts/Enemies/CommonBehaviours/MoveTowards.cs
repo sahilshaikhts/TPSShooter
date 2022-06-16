@@ -1,34 +1,33 @@
 using Behaviourtree;
 using EventSystem;
 using Sahil.AStar;
+using ShootingGame;
 using UnityEngine;
 
 public class MoveTowards : Node
 {
-    public string key_ownerGameObject;
-    public string key_targetPosition;
+    Character m_ownerCharacter;
     PathFinder pathFinder;
 
-    public MoveTowards(BehaviourTree aTree, string aKeyOwnerGameObject, string aKeyTargetPostion) : base(aTree) 
+    public string key_ownerCharacter;
+    public string key_targetCharacter;
+
+    public MoveTowards(BehaviourTree aTree, string aKeyOwnerCharacter, string aKeyTargetCharacter) : base(aTree) 
     {
-        key_ownerGameObject = aKeyOwnerGameObject; 
-        key_targetPosition = aKeyTargetPostion; 
+        key_ownerCharacter = aKeyOwnerCharacter;
+        key_targetCharacter = aKeyTargetCharacter;
+        m_ownerCharacter = (Character)GetData(key_ownerCharacter);
         pathFinder = new PathFinder(GameManager.instance.GetGridForPathFinding());
     }
 
     public override NodeState Execute()
     {
-        Transform ownerTransform = (Transform)GetData(key_ownerGameObject);
-        Vector3 targetPostion = (Vector3)GetData(key_targetPosition);
+        Vector3 ownerPosition = m_ownerCharacter.GetPosition();
+        Vector3 targetPostion = ((Character)GetData(key_targetCharacter)).GetPosition();
         
-        Cell_AStar nextCell= pathFinder.CalculatePath(ownerTransform.position, targetPostion)[1];
-
-        if (ownerTransform == null || targetPostion==null) 
-            return NodeState.Failed;
-
-        Vector3 direction = nextCell.GetWorldPosition()- ownerTransform.position;
+        Vector3 direction = pathFinder.GetMoveDirection(ownerPosition, targetPostion);
         
-        GameManager.instance.GetEventManager().AddEvent(new AIMoveEvent(ownerTransform.gameObject, direction.normalized));
+        GameManager.instance.GetEventManager().AddEvent(new AIMoveEvent(m_ownerCharacter, direction.normalized));
 
         return NodeState.Sucessful;
     }

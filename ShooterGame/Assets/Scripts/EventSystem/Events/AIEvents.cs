@@ -1,15 +1,28 @@
+using ShootingGame;
 using UnityEngine;
 namespace EventSystem
 {
     public class AIMoveEvent : IEvent
     {
-        GameObject m_gameObject;
+        Character m_character;
         Vector3 m_direction;
-        public AIMoveEvent(GameObject aGameObject, Vector3 direction) { m_direction = direction; m_gameObject = aGameObject; }
+        public AIMoveEvent(Character aCharacter, Vector3 aDirection) { m_direction = aDirection; m_character = aCharacter; }
         public Vector3 GetDirection() { return m_direction; }
-        public GameObject GetCallerGameObject() { return m_gameObject; }
+        public Character GetCaller() { return m_character; }
 
         public string GetEventType() { return "AIMoveEvent"; }
         public static string EventType() { return "AIMoveEvent"; }
+    }
+
+    public class AIShootTargetEvent : IEvent
+    {
+        Character m_character;
+        Vector3 m_targetDirection;
+        public AIShootTargetEvent(Character aCharacter, Vector3 aTargetDirection) { m_targetDirection = aTargetDirection; m_character = aCharacter; }
+        public Vector3 GetDirection() { return m_targetDirection; }
+        public Character GetCaller() { return m_character; }
+
+        public string GetEventType() { return "AIShootTargetEvent"; }
+        public static string EventType() { return "AIShootTargetEvent"; }
     }
 }
