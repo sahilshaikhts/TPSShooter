@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
                     Gizmos.color = new Color(1, 1, 1, .6f);
                 else
                     Gizmos.color = Color.red;
-            Gizmos.DrawCube(m_AStar_Grid.m_grid[x,y].GetWorldPosition(), Vector3.one*2);
+            Gizmos.DrawCube(m_AStar_Grid.m_grid[x,y].GetWorldPosition(), Vector3.one*1);
         }
     }
 }

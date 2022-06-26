@@ -25,7 +25,7 @@ public class Enm_luminousCentaurs : Character, IShotable
         GameManager.instance.GetEventManager().SubscribeToEvent(AIMoveEvent.EventType(), HandleMoveEvent);
         GameManager.instance.GetEventManager().SubscribeToEvent(AIShootTargetEvent.EventType(), HandleShootTargetEvent);
     }
-
+  
     private void HandleMoveEvent(IEvent aEvent)
     {
         AIMoveEvent moveEvent = (AIMoveEvent)aEvent;
@@ -37,10 +37,13 @@ public class Enm_luminousCentaurs : Character, IShotable
      
     private void HandleShootTargetEvent(IEvent aEvent)
     {
-        AIShootTargetEvent moveEvent = (AIShootTargetEvent)aEvent;
-        if (moveEvent.GetCaller() == this)
+        AIShootTargetEvent shootEvent = (AIShootTargetEvent)aEvent;
+        if (shootEvent.GetCaller() == this)
         {
-            Ray ray = new Ray(GetPositionOfHead(), moveEvent.GetDirection());
+            Ray ray = new Ray(GetPositionOfHead(), shootEvent.GetDirection());
+            
+            m_movementComponent.AddRotation(shootEvent.GetDirection());
+            
             m_weaponHolder.Fire(ray);
         }
     }

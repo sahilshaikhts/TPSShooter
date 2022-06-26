@@ -113,5 +113,7 @@ namespace Sahil.AStar
             return neighbours;
 
         }
+
+        public Cell_AStar GetCellFromWorldPos(Vector3 aPosition) { return m_grid.GetCellFromWorldPosition(aPosition); }
     }
 }

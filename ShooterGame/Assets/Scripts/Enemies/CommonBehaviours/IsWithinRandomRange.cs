@@ -1,43 +1,45 @@
 using Behaviourtree;
+using Sahil.AStar;
 using ShootingGame;
 using UnityEngine;
 
 public class IsWithinRandomRange : Node
 {
+    private string key_owner;
+    private string key_target;
+    private string key_wPositionToMoveTowards;
 
-    public IsWithinRandomRange(BehaviourTree aTree, string aKeyOwnerCharacter, string aKeyTargetCharacter, float aRangeMin, float aRangeMax) : base(aTree)
+    private float rangeMin, rangeMax;
+    private float randomDistance=20;
+
+    public IsWithinRandomRange(BehaviourTree aTree, string aKeyOwnerCharacter, string aKeyTargetCharacter, string aKeywPositionToMoveTowards, float aRangeMin, float aRangeMax) : base(aTree)
     {
         key_owner = aKeyOwnerCharacter;
         key_target = aKeyTargetCharacter;
 
         rangeMax = aRangeMax;
         rangeMin = aRangeMin;
-    }
 
-    public string key_owner;
-    public string key_target;
-    public float rangeMin, rangeMax;
-    public float randomDistance;
+        key_wPositionToMoveTowards = aKeywPositionToMoveTowards;
+    }
 
     public override NodeState Execute()
     {
-        if (m_tree.GetData(key_target) != null && m_tree.GetData(key_owner) != null)
+        Vector3 position = ((Character)m_tree.GetData(key_owner)).GetPosition();
+        Vector3? targetPosition = ((Character)m_tree.GetData(key_target)).GetPosition();
+
+        float distance = Vector3.SqrMagnitude(position - (Vector3)targetPosition);
+
+        if (distance < (randomDistance * randomDistance))
         {
-            Vector3 position = ((Character)m_tree.GetData(key_owner)).GetPosition();
-            Vector3 targetPosition = ((Character)m_tree.GetData(key_target)).GetPosition();
-
-            //If node is being executed for the first time,set a new random distance
-            if (m_state != NodeState.Running)
-            {
-                //Adjust the max range if unit is closer to target than max.
-                rangeMax = Mathf.Min(rangeMax, Vector3.Distance(position, targetPosition));
-
-                randomDistance = Random.Range(rangeMin, rangeMax);
-            }
-
-            if (Vector3.SqrMagnitude(position - targetPosition) < randomDistance * randomDistance)
-                return m_state;
+            Debug.Log("InRange");
+            return NodeState.Sucessful;
         }
-        return m_state;
+        else
+        {
+            m_tree.SetData(key_wPositionToMoveTowards, targetPosition);
+            Debug.LogWarning("set " + distance);
+            return NodeState.Failed;
+        }
     }
 }

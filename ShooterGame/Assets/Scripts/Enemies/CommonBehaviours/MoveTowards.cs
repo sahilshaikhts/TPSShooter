@@ -10,24 +10,35 @@ public class MoveTowards : Node
     PathFinder pathFinder;
 
     public string key_ownerCharacter;
-    public string key_targetCharacter;
+    public string key_targetWPosition;
 
-    public MoveTowards(BehaviourTree aTree, string aKeyOwnerCharacter, string aKeyTargetCharacter) : base(aTree) 
+    //TODO: What if this behaviour looked up the cell it needs to move towards set by other behaviour and get executed at the end?s?
+    public MoveTowards(BehaviourTree aTree, string aKeyOwnerCharacter,string aKeyPathFinder, string aKeyTargetWPosition) : base(aTree) 
     {
         key_ownerCharacter = aKeyOwnerCharacter;
-        key_targetCharacter = aKeyTargetCharacter;
+        key_targetWPosition = aKeyTargetWPosition;
         m_ownerCharacter = (Character)GetData(key_ownerCharacter);
-        pathFinder = new PathFinder(GameManager.instance.GetGridForPathFinding());
+        pathFinder = (PathFinder)GetData(aKeyPathFinder);
     }
 
     public override NodeState Execute()
     {
         Vector3 ownerPosition = m_ownerCharacter.GetPosition();
-        Vector3 targetPostion = ((Character)GetData(key_targetCharacter)).GetPosition();
+        Vector3? targetPosition= ((Vector3?)GetData(key_targetWPosition));
+
+        if (targetPosition == null)
+        {
+            Debug.Log(null);
+            return NodeState.Failed;
         
-        Vector3 direction = pathFinder.GetMoveDirection(ownerPosition, targetPostion);
+        }else
+            Debug.Log(targetPosition);
+        Vector3 direction = pathFinder.GetMoveDirection(ownerPosition, (Vector3)targetPosition);
         
         GameManager.instance.GetEventManager().AddEvent(new AIMoveEvent(m_ownerCharacter, direction.normalized));
+        
+        //Reset
+        m_tree.SetData("key_CellToMoveTowards", null);
 
         return NodeState.Sucessful;
     }

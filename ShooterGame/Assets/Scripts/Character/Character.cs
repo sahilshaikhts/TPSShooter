@@ -1,3 +1,5 @@
+using Sahil.AStar;
+using System;
 using UnityEngine;
 
 namespace ShootingGame
@@ -26,5 +28,10 @@ public class Character : MonoBehaviour
         return headPosition;
     }
     public int GetCharacterLayer() { return gameObject.layer; }
-}
+
+        public static explicit operator Character(PathFinder v)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

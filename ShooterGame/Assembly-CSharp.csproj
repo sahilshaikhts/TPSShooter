@@ -64,7 +64,7 @@
     <Compile Include="Assets\Scripts\CameraSystem\CameraManager.cs" />
     <Compile Include="Assets\Prefabs\IsWithinRange.cs" />
     <Compile Include="Assets\Scripts\Character\Player\Player.cs" />
-    <Compile Include="Assets\Scripts\BehaviourTree\Source\Node.cs" />
+    <Compile Include="Assets\Scripts\BehaviourTree\Source\Node\Node.cs" />
     <Compile Include="Assets\Scripts\CameraSystem\CameraPOI\CameraInterestPoint.cs" />
     <Compile Include="Assets\Scripts\InputSystem\Input\InputDevice.cs" />
     <Compile Include="Assets\Scripts\EventSystem\EventManager.cs" />
@@ -79,7 +79,7 @@
     <Compile Include="Assets\Scripts\WeaponSystem\Source\WeaponClasses\Base\WeaponBase.cs" />
     <Compile Include="Assets\Scripts\Enemies\CommonBehaviours\MoveInLineOfSight.cs" />
     <Compile Include="Assets\Scripts\Enemies\CommonBehaviours\MoveTowards.cs" />
-    <Compile Include="Assets\Scripts\BehaviourTree\Source\Sequence.cs" />
+    <Compile Include="Assets\Scripts\BehaviourTree\Source\Node\Sequence.cs" />
     <Compile Include="Assets\Scripts\PathFinding_AStar\Grid_AStar.cs" />
     <Compile Include="Assets\Scripts\WeaponSystem\Source\WeaponClasses\Base\WeaponHolderBase.cs" />
     <Compile Include="Assets\Scripts\Utilities\Timer.cs" />
@@ -95,7 +95,8 @@
     <Compile Include="Assets\Scripts\Character\Character.cs" />
     <Compile Include="Assets\Scripts\WeaponSystem\Source\WeaponClasses\RangedWeapon.cs" />
     <Compile Include="Assets\Scripts\PathFinding_AStar\PathFinder.cs" />
-    <Compile Include="Assets\Scripts\BehaviourTree\Source\Selector.cs" />
+    <Compile Include="Assets\Scripts\BehaviourTree\Source\Node\Selector.cs" />
+    <Compile Include="Assets\Scripts\BehaviourTree\Source\Node\Invertor.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
