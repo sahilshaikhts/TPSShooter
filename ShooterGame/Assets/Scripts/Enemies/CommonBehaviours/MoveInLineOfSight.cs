@@ -7,39 +7,31 @@ using UnityEngine;
 
 public class MoveInLineOfSight : Node
 {
+    AIInfo m_aiInfo;
     Character m_ownerCharacter;
     LayerMask m_weaponLayerMask;
-
-    Vector3? m_shootableSpotPosition;
     PathFinder m_pathFinder;
-    public string key_ownerCharacter;
-    public string key_targetCharacter;
+    Vector3? m_shootableSpotPosition;
     public string key_wPositionToMoveTowards;
-    public string key_bCanShoot;
 
 
-    public MoveInLineOfSight(BehaviourTree aTree, string aKeyOwnerCharacter, string aKeyTargetCharacter,string aKeyWPositionToMoveTowards,string aKeyPathFinder, string aKeybCanShoot, LayerMask aWeaponRayMask) : base(aTree) 
+    public MoveInLineOfSight(BehaviourTree aTree, string aiInfo,string aKeyWPositionToMoveTowards) : base(aTree) 
     {
-        key_ownerCharacter = aKeyOwnerCharacter;
-        key_targetCharacter = aKeyTargetCharacter;
-        m_ownerCharacter = ((Character)m_tree.GetData(key_ownerCharacter));
-        m_pathFinder = ((PathFinder)m_tree.GetData(aKeyPathFinder));
-        key_bCanShoot = aKeybCanShoot;
+        m_aiInfo = (AIInfo)GetData(aiInfo);
 
-        m_weaponLayerMask = aWeaponRayMask;
+        m_ownerCharacter = m_aiInfo.GetOwnerCharacter();
+        m_pathFinder = m_aiInfo.GetPathFinder();
+
+        m_weaponLayerMask = m_aiInfo.GetWeaponLayerMask();
 
         key_wPositionToMoveTowards = aKeyWPositionToMoveTowards;
     }
 
     public override NodeState Execute()
     {
-        Vector3 ownerPosition = m_ownerCharacter.GetPosition();
-        Character targetCharacter = (Character)GetData(key_targetCharacter);
+        Character targetCharacter = m_aiInfo.GetTargetCharacter();
 
-        //reset value
-        m_tree.SetData("key_bCanShoot", (bool)false);
-
-;       //If this node is being ran for the first time check if can shoot and if not look for spots to shoot from and move towards it.
+        //If this node is being ran for the first time check if can shoot and if not look for spots to shoot from and move towards it.
         if (m_shootableSpotPosition == null)
         {
             if (CheckIfCanShootTarget(m_ownerCharacter.GetPositionOfHead(), targetCharacter) == false)
@@ -48,9 +40,7 @@ public class MoveInLineOfSight : Node
             }
             else
             {
-                m_tree.SetData("key_bCanShoot", (bool)true);
                 m_shootableSpotPosition = null;
-                return NodeState.Sucessful;
             }
         }
         else //If m_shootableSpotPosition already assigned check if it is still valid, if not find different spot.
@@ -70,7 +60,7 @@ public class MoveInLineOfSight : Node
         //Move towards spot where the character can shoot from.
         m_tree.SetData(key_wPositionToMoveTowards, m_shootableSpotPosition);
 
-        return NodeState.Failed;
+        return NodeState.Sucessful;
     }
 
 
@@ -97,7 +87,7 @@ public class MoveInLineOfSight : Node
         
         List<Vector3> spotsToShootFrom=new List<Vector3>();
 
-        Character targetCharacter = (Character)GetData(key_targetCharacter);
+        Character targetCharacter = m_aiInfo.GetTargetCharacter();
 
         Vector3 characterHeight = m_ownerCharacter.GetPositionOfHead()-m_ownerCharacter.GetPosition();
 

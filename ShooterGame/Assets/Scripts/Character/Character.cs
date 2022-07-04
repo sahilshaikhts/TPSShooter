@@ -18,6 +18,7 @@ public class Character : MonoBehaviour
         return true;
     }
     public Vector3 GetPosition() { return transform.position; }
+    public Vector3 GetForwardDirection() { return transform.forward; }
     public int GetHP() { return m_health; }
 
     public Vector3 GetPositionOfHead()
@@ -29,9 +30,5 @@ public class Character : MonoBehaviour
     }
     public int GetCharacterLayer() { return gameObject.layer; }
 
-        public static explicit operator Character(PathFinder v)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

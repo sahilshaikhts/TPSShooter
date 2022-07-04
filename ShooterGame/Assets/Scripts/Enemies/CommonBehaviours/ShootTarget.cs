@@ -6,36 +6,27 @@ using UnityEngine;
 
 public class ShootTarget : Node
 {
-    Character m_ownerCharacter;
-    PathFinder pathFinder;
+    public string key_aiInfo;
 
-    public string key_ownerCharacter;
-    public string key_targetCharacter;
-    public string key_bCanShoot;
-
-    public ShootTarget(BehaviourTree aTree, string aKeyOwnerCharacter, string aKeyTargetCharacter, string aKeybCanShoot) : base(aTree)
+    public ShootTarget(BehaviourTree aTree, string aKeyAIInfo) : base(aTree)
     {
-        key_ownerCharacter = aKeyOwnerCharacter;
-        key_targetCharacter = aKeyTargetCharacter;
-        m_ownerCharacter = ((Character)m_tree.GetData(key_ownerCharacter));
-        key_bCanShoot=aKeybCanShoot;
-        pathFinder = new PathFinder(GameManager.instance.GetGridForPathFinding());
+        key_aiInfo = aKeyAIInfo;
     }
 
     public override NodeState Execute()
     {
-        Vector3 ownerPosition = m_ownerCharacter.GetPositionOfHead();
-        Vector3 targetPostion = ((Character)GetData(key_targetCharacter)).GetPositionOfHead();
-        bool canShoot= (bool)GetData(key_bCanShoot);
+        AIInfo aIInfo=(AIInfo)GetData(key_aiInfo);
+        Vector3 ownerPosition = aIInfo.GetOwnerCharacter().GetPositionOfHead();
+        Vector3 targetPostion = aIInfo.GetTargetCharacter().GetPositionOfHead();
         
-        if(canShoot==false)
+        if(aIInfo.canShoot == false)
         {
             return NodeState.Failed;
         }
 
         Vector3 direction = targetPostion - ownerPosition;
 
-        GameManager.instance.GetEventManager().AddEvent(new AIShootTargetEvent(m_ownerCharacter, direction.normalized));
+        GameManager.instance.GetEventManager().AddEvent(new AIShootTargetEvent(aIInfo.GetOwnerCharacter(), direction.normalized));
 
         return NodeState.Sucessful;
     }

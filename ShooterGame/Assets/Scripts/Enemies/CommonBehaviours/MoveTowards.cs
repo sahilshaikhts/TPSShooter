@@ -6,24 +6,19 @@ using UnityEngine;
 
 public class MoveTowards : Node
 {
-    Character m_ownerCharacter;
-    PathFinder pathFinder;
-
-    public string key_ownerCharacter;
+    public string key_aiInfo;
     public string key_targetWPosition;
 
-    //TODO: What if this behaviour looked up the cell it needs to move towards set by other behaviour and get executed at the end?s?
-    public MoveTowards(BehaviourTree aTree, string aKeyOwnerCharacter,string aKeyPathFinder, string aKeyTargetWPosition) : base(aTree) 
+    public MoveTowards(BehaviourTree aTree, string aKeyAIInfo,string aKeyTargetWPosition) : base(aTree) 
     {
-        key_ownerCharacter = aKeyOwnerCharacter;
+        key_aiInfo = aKeyAIInfo;
         key_targetWPosition = aKeyTargetWPosition;
-        m_ownerCharacter = (Character)GetData(key_ownerCharacter);
-        pathFinder = (PathFinder)GetData(aKeyPathFinder);
     }
 
     public override NodeState Execute()
     {
-        Vector3 ownerPosition = m_ownerCharacter.GetPosition();
+        AIInfo aIInfo = (AIInfo)GetData(key_aiInfo);
+        Vector3 ownerPosition = aIInfo.GetOwnerCharacter().GetPosition();
         Vector3? targetPosition= ((Vector3?)GetData(key_targetWPosition));
 
         if (targetPosition == null)
@@ -33,12 +28,13 @@ public class MoveTowards : Node
         
         }else
             Debug.Log(targetPosition);
-        Vector3 direction = pathFinder.GetMoveDirection(ownerPosition, (Vector3)targetPosition);
+
+        Vector3 direction = aIInfo.GetPathFinder().GetMoveDirection(ownerPosition, (Vector3)targetPosition);
         
-        GameManager.instance.GetEventManager().AddEvent(new AIMoveEvent(m_ownerCharacter, direction.normalized));
+        GameManager.instance.GetEventManager().AddEvent(new AIMoveEvent(aIInfo.GetOwnerCharacter(), direction.normalized));
         
         //Reset
-        m_tree.SetData("key_CellToMoveTowards", null);
+        m_tree.SetData(key_targetWPosition, null);
 
         return NodeState.Sucessful;
     }
