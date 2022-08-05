@@ -339,6 +339,7 @@
 "Assets/Scripts/BehaviourTree/Source/BehaviourTree.cs"
 "Assets/Scripts/BehaviourTree/Source/Nodes/Action/SetValue.cs"
 "Assets/Scripts/BehaviourTree/Source/Nodes/Action/Task.cs"
+"Assets/Scripts/BehaviourTree/Source/Nodes/Composite/ExecuteAll.cs"
 "Assets/Scripts/BehaviourTree/Source/Nodes/Composite/Selector.cs"
 "Assets/Scripts/BehaviourTree/Source/Nodes/Composite/Sequence.cs"
 "Assets/Scripts/BehaviourTree/Source/Nodes/Conditional/BoolCondition.cs"

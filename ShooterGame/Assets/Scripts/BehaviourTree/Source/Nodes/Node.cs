@@ -20,6 +20,12 @@ public abstract class Node
         }
             return null;
     }
+
+    protected void SetData(string aKey, object aValue)
+    {
+        if (m_tree)
+            m_tree.SetData(aKey, aValue);
+    }
     public void SetParentNode(Node aParent) { m_parentNode = aParent; }
     public void SetBehaviourTree(BehaviourTree aTree) { m_tree = aTree; }
 

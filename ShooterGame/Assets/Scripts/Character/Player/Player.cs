@@ -94,7 +94,7 @@ public class Player : Character,IShotable
         //pos = GameManager.instance.GetGridForPathFinding().GetCellFromWorldPosition(target.transform.position).GetWorldPosition();
         //Gizmos.DrawCube(pos+Vector3.up*.3f, Vector3.one*2);
 
-        List<Vector3>path= m_pathFinder.GetNeightbouringCellsPosition(transform.position,3);
+        List<Vector3>path= m_pathFinder.GetNeighbourCellsPosition(transform.position,3);
 
         if (path == null) return;
             float height = GetPositionOfHead().y-transform.position.y;
@@ -107,7 +107,7 @@ public class Player : Character,IShotable
 
     public void HandleGettingShot(Vector3 projetileDirection, int damageAmount)
     {
-            Debug.Log("Got shot!!");
+        Debug.Log("Got shot!!");
     }
 
 }

@@ -22,15 +22,7 @@ public class SetValue<T> : Node
         //if the variable in blackboard that has the value is not set try set it through the member variable m_value
         if (key_value == null)
         {
-            if (m_value == null)
-            {
-                //if both key_value and m_value is null return failed.
-                return NodeState.Failed;
-            }
-            else
-            {
-                m_tree.SetData(key_variable, m_value);
-            }
+            m_tree.SetData(key_variable, m_value);
         }
         else
         {
@@ -38,6 +30,6 @@ public class SetValue<T> : Node
             m_tree.SetData(key_variable, (T)GetData(key_value));
         }
      
-        return NodeState.Running;
+        return NodeState.Sucessful;
     }
 }

@@ -11,11 +11,13 @@ public class MoveInLineOfSight : Node
     Character m_ownerCharacter;
     LayerMask m_weaponLayerMask;
     PathFinder m_pathFinder;
-    Vector3? m_shootableSpotPosition;
+
     public string key_wPositionToMoveTowards;
+    public string key_wMaxDistanceToPlayer;
+    public string key_wSpotToShootFrom;
 
 
-    public MoveInLineOfSight(BehaviourTree aTree, string aiInfo,string aKeyWPositionToMoveTowards) : base(aTree) 
+    public MoveInLineOfSight(BehaviourTree aTree, string aiInfo,string aKeyWPositionToMoveTowards, string aKeySpotToShootFrom, string aKeyMaxDistanceToPlayer) : base(aTree) 
     {
         m_aiInfo = (AIInfo)GetData(aiInfo);
 
@@ -25,41 +27,45 @@ public class MoveInLineOfSight : Node
         m_weaponLayerMask = m_aiInfo.GetWeaponLayerMask();
 
         key_wPositionToMoveTowards = aKeyWPositionToMoveTowards;
+        key_wMaxDistanceToPlayer= aKeyMaxDistanceToPlayer;
+        key_wSpotToShootFrom = aKeySpotToShootFrom;
     }
 
     public override NodeState Execute()
     {
         Character targetCharacter = m_aiInfo.GetTargetCharacter();
+        Vector3? shootableSpotPosition=(Vector3?)GetData(key_wSpotToShootFrom);
 
         //If this node is being ran for the first time check if can shoot and if not look for spots to shoot from and move towards it.
-        if (m_shootableSpotPosition == null)
+        if (shootableSpotPosition == null)
         {
             if (CheckIfCanShootTarget(m_ownerCharacter.GetPositionOfHead(), targetCharacter) == false)
             {
-                m_shootableSpotPosition = FindASpotToShootFrom(3);
+                shootableSpotPosition = FindASpotToShootFrom(3);
+                //If couldn't find any close spot to shoot from return failure.
+                if (shootableSpotPosition.HasValue == false)
+                {
+                    return NodeState.Failed;
+                }
             }
             else
             {
-                m_shootableSpotPosition = null;
+                return NodeState.Sucessful;
             }
-        }
-        else //If m_shootableSpotPosition already assigned check if it is still valid, if not find different spot.
-        {
-            if(CheckIfCanShootTarget((Vector3)m_shootableSpotPosition, targetCharacter)==false)
-            {
-                m_shootableSpotPosition = FindASpotToShootFrom(3);
-            }
-        }
-         
-        //If couldn't find any close spot to shoot from return failure.
-        if(m_shootableSpotPosition.HasValue==false)
-        {
-            return NodeState.Failed;
         }
 
         //Move towards spot where the character can shoot from.
-        m_tree.SetData(key_wPositionToMoveTowards, m_shootableSpotPosition);
+        float distanceFromSpot = Vector3.SqrMagnitude(m_ownerCharacter.GetPosition() - (Vector3)shootableSpotPosition);
+       
+        if (distanceFromSpot > 0.5f)
+        {
+            m_tree.SetData(key_wPositionToMoveTowards, shootableSpotPosition);
+        }
+        else
+            shootableSpotPosition = null;
 
+        m_tree.SetData(key_wSpotToShootFrom,(Vector3?)shootableSpotPosition);
+        
         return NodeState.Sucessful;
     }
 
@@ -67,10 +73,13 @@ public class MoveInLineOfSight : Node
     private bool CheckIfCanShootTarget(Vector3 aOriginPosition,Character aTargetCharacter)
     {
         Vector3 direction= aTargetCharacter.GetPositionOfHead()-aOriginPosition;
+
         Ray ray=new Ray(aOriginPosition, direction.normalized);
         RaycastHit hit;
+        
         Debug.DrawRay(ray.origin,ray.direction*100,Color.red,.5f);
-        if (Physics.Raycast(ray, out hit, m_weaponLayerMask))
+        
+        if (Physics.SphereCast(ray,1, out hit, m_weaponLayerMask))
         {
             //If ray hits target return true.
             if (hit.transform.gameObject.layer == aTargetCharacter.GetCharacterLayer())
@@ -83,25 +92,29 @@ public class MoveInLineOfSight : Node
 
     private Vector3? FindASpotToShootFrom(int aRadiusOfGridCellsToCheck)
     {
-        List<Vector3> spotsToCheck= m_pathFinder.GetNeightbouringCellsPosition(m_ownerCharacter.GetPosition(), aRadiusOfGridCellsToCheck); //Get list of neighbouring cells to try and shoot from.
+        List<Vector3> spotsToCheck= m_pathFinder.GetWalkableNeighbourCellsPosition(m_ownerCharacter.GetPosition()+m_ownerCharacter.GetForwardDirection()* (aRadiusOfGridCellsToCheck/2), aRadiusOfGridCellsToCheck); //Get list of neighbouring cells to try and shoot from.
         
         List<Vector3> spotsToShootFrom=new List<Vector3>();
 
         Character targetCharacter = m_aiInfo.GetTargetCharacter();
 
-        Vector3 characterHeight = m_ownerCharacter.GetPositionOfHead()-m_ownerCharacter.GetPosition();
+        float characterHeight = m_ownerCharacter.GetPositionOfHead().y;
 
         //Check from each neighbouing cell if this character can shoot target and add that cell to a list.
         foreach (Vector3 spot in spotsToCheck)
         {
-            if (CheckIfCanShootTarget(characterHeight + spot, targetCharacter))
-                spotsToShootFrom.Add(spot);
+            //First check if the spot is within MaxDistacneToPlayer
+            if (Vector3.SqrMagnitude(targetCharacter.GetPosition() - spot) < (float)GetData(key_wMaxDistanceToPlayer))
+            {
+                //Check if we can shoot from the spot(raycast)
+                if (CheckIfCanShootTarget(new Vector3(spot.x, characterHeight, spot.z), targetCharacter))
+                    spotsToShootFrom.Add(spot);
+            }
         }
         
         //From the shootable list of cells find the clossest one.
         Vector3? nearestSpot=null;
         float nearestSpotDist = float.MaxValue;
-        List<float> nearestSpotss=new List<float>();
         for(int i=0;i<spotsToShootFrom.Count;i++)
         {
             if ((m_ownerCharacter.GetPosition() - spotsToShootFrom[i]).sqrMagnitude < nearestSpotDist)

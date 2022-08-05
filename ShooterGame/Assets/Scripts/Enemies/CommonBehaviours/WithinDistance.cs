@@ -18,7 +18,7 @@ public class WithinDistance : Node
     public WithinDistance(BehaviourTree aTree, string aKeyAIInfo, string aKeyDistance) : base(aTree)
     {
         key_AIInfo = aKeyAIInfo;
-        aKeyDistance = key_DistanceToCheck;
+        key_DistanceToCheck =aKeyDistance ;
     }
 
     public override NodeState Execute()

@@ -20,6 +20,27 @@ namespace Sahil.AStar
             List<Cell_AStar> vistiedCells = new List<Cell_AStar>();
             List<Cell_AStar> openCells = new List<Cell_AStar>();
 
+            //if origin or target cell is not walkable return null
+            if (targetCell.IsWalkable() == false)
+            {
+                List<Vector3> positions = GetWalkableNeighbourCellsPosition(targetCell.GetWorldPosition(), 2);
+                float squaredDist = float.MaxValue;
+
+                Vector3? nearestSpot = null;
+                float nearestSpotDist = float.MaxValue;
+                List<float> nearestSpotss = new List<float>();
+
+                for (int i = 0; i < positions.Count; i++)
+                {
+                    if ((aTargetPosition - positions[i]).sqrMagnitude < nearestSpotDist)
+                    {
+                        nearestSpot = positions[i];
+                        nearestSpotDist = (aTargetPosition - positions[i]).sqrMagnitude;
+                    }
+                }
+                targetCell = m_grid.GetCellFromWorldPosition((Vector3)nearestSpot);
+            }
+            
             openCells.Add(originCell);
 
             while (openCells.Count > 0)
@@ -100,10 +121,10 @@ namespace Sahil.AStar
                 return 14 * distX + 10 * (distY - distX);
         }
 
-        public List<Vector3> GetNeightbouringCellsPosition(Vector3 aCenter,int aCellRadius)
+        public List<Vector3> GetNeighbourCellsPosition(Vector3 aCenter, int aCellRadius)
         {
-            List<Vector3> neighbours=new List<Vector3>();
-            List<Cell_AStar> neighbourCells= m_grid.GetNeighboursInGridRadius(m_grid.GetCellFromWorldPosition(aCenter),aCellRadius);
+            List<Vector3> neighbours = new List<Vector3>();
+            List<Cell_AStar> neighbourCells = m_grid.GetNeighboursInGridRadius(m_grid.GetCellFromWorldPosition(aCenter), aCellRadius);
 
             foreach (Cell_AStar cell in neighbourCells)
             {
@@ -114,6 +135,24 @@ namespace Sahil.AStar
 
         }
 
+        public List<Vector3> GetWalkableNeighbourCellsPosition(Vector3 aCenter,int aCellRadius)
+        {
+            List<Vector3> neighbours=new List<Vector3>();
+            List<Cell_AStar> neighbourCells= m_grid.GetNeighboursInGridRadius(m_grid.GetCellFromWorldPosition(aCenter),aCellRadius);
+
+            foreach (Cell_AStar cell in neighbourCells)
+            {
+                if(cell.IsWalkable())
+                neighbours.Add(cell.GetWorldPosition());
+            }
+
+            return neighbours;
+
+        }
+
         public Cell_AStar GetCellFromWorldPos(Vector3 aPosition) { return m_grid.GetCellFromWorldPosition(aPosition); }
+
+        public bool IsWalkable(Vector3 aWorldPosition)=>m_grid.GetCellFromWorldPosition(aWorldPosition).IsWalkable();
+
     }
 }

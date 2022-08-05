@@ -101,6 +101,7 @@
     <Compile Include="Assets\Scripts\WeaponSystem\Source\WeaponClasses\RangedWeapon.cs" />
     <Compile Include="Assets\Scripts\PathFinding_AStar\PathFinder.cs" />
     <Compile Include="Assets\Scripts\BehaviourTree\Source\Nodes\Action\Task.cs" />
+    <Compile Include="Assets\Scripts\BehaviourTree\Source\Nodes\Composite\ExecuteAll.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

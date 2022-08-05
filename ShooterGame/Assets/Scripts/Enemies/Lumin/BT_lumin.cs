@@ -18,42 +18,52 @@ public class BT_lumin : BehaviourTree
     public void Start()
     {
         m_pathFinder = new PathFinder(GameManager.instance.GetGridForPathFinding());
-        
-        m_aiInfo=new AIInfo(m_self,m_player, m_pathFinder, m_layerMask);
+
+        m_aiInfo = new AIInfo(m_self, m_player, m_pathFinder, m_layerMask);
 
         InitializeBlackBoard();
-        Selector root=new Selector(this);
+        Selector root = new Selector(this);
         m_root = root;
 
         //**** TODO: Add check for if about to or being shot at ,defend or try to shoot.
-        Selector evaluateWhereToMove=new Selector(this);
-        Sequence moveStrategically =new Sequence(this);
+        Sequence movementTree = new Sequence(this);
+        Selector evaluateWhereToMove = new Selector(this);
+        Sequence moveStrategically = new Sequence(this);
+        ExecuteAll movingTowardsPlayer=new ExecuteAll(this);
 
-        WithinDistance withinRangeNode = new WithinDistance(this, "AIInfo", 20);
-        SetValue<Vector3> setMovePositionToTarget=new SetValue<Vector3>(this, "wPositionToMoveTowards", "TargetPosition");
+        WithinDistance withinRangeNode = new WithinDistance(this, "AIInfo", "MaxDistanceFromPlayer");
+        SetValue<Vector3> setMovePositionToTarget = new SetValue<Vector3>(this, "wPositionToMoveTowards", "TargetPosition");
+        SetValue<Vector3?> resetSpotToShootFrom = new SetValue<Vector3?>(this, "SpotToShootFrom", (Vector3?)null);
 
         Sequence aggresive = new Sequence(this);
         //IfInLineOfSight
-        MoveInLineOfSight moveInLineOfSight=new MoveInLineOfSight(this, "AIInfo", "wPositionToMoveTowards");
-            
-        ShootTarget shootTarget=new ShootTarget(this, "AIInfo");
-        
+        MoveInLineOfSight moveInLineOfSight = new MoveInLineOfSight(this, "AIInfo", "wPositionToMoveTowards", "SpotToShootFrom", "MaxDistanceFromPlayer");
+
+        ShootTarget shootTarget = new ShootTarget(this, "AIInfo");
+
 
         //MoveTowards player
         MoveTowards moveTowardsNode = new MoveTowards(this, "AIInfo", "wPositionToMoveTowards");
-        
-        
-        m_root.AddChildNode(evaluateWhereToMove);
 
-        evaluateWhereToMove.AddChildNode(moveStrategically);
-            moveStrategically.AddChildNode(withinRangeNode);
-            moveStrategically.AddChildNode(aggresive);
+        //Root
+        m_root.AddChildNode(movementTree);
+        {
+            movementTree.AddChildNode(evaluateWhereToMove);
+            {
+                evaluateWhereToMove.AddChildNode(moveStrategically);
+                {
+                    moveStrategically.AddChildNode(withinRangeNode);
+                    moveStrategically.AddChildNode(aggresive);
                     aggresive.AddChildNode(moveInLineOfSight);
-
-        evaluateWhereToMove.AddChildNode(setMovePositionToTarget);
-
-        m_root.AddChildNode(moveTowardsNode);
-
+                }
+                evaluateWhereToMove.AddChildNode(movingTowardsPlayer);
+                {
+                    movingTowardsPlayer.AddChildNode(setMovePositionToTarget);
+                    movingTowardsPlayer.AddChildNode(resetSpotToShootFrom);
+                }
+            }
+            movementTree.AddChildNode(moveTowardsNode);
+        }
     }
 
     void InitializeBlackBoard()
@@ -62,10 +72,12 @@ public class BT_lumin : BehaviourTree
         AddKey("wPositionToMoveTowards");
         AddKey("ownerHeadPosition");
         AddKey("TargetPosition");
+        AddKey("SpotToShootFrom");
         AddKey("allowedToShoot");
 
         SetData("AIInfo", (AIInfo)m_aiInfo);
         SetData("wPositionToMoveTowards", (Vector3?)null);
+        SetData("MaxDistanceFromPlayer", (float)20);
     }
     private void Update()
     {
@@ -142,7 +154,6 @@ class AIInfo
     public Character GetTargetCharacter() { return m_target; }
 
     public LayerMask GetWeaponLayerMask() { return m_weaponLayerMask; }
-
     //Setters
     public void SetCellToMoveTowards(Cell aCell) { m_cellToMoveTowards=aCell; }
 }
