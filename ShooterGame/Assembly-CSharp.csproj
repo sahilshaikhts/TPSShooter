@@ -93,6 +93,7 @@
     <Compile Include="Assets\Scripts\CameraSystem\Camera\BaseCamera.cs" />
     <Compile Include="Assets\Scripts\EventSystem\Events\Events.cs" />
     <Compile Include="Assets\Scripts\Grid\Cell.cs" />
+    <Compile Include="Assets\Scripts\BehaviourTree\Source\Nodes\Composite\ExecuteAll.cs" />
     <Compile Include="Assets\Scripts\WeaponSystem\Source\ProjectileResponseData.cs" />
     <Compile Include="Assets\Scripts\Enemies\Lumin\BT_lumin.cs" />
     <Compile Include="Assets\Scripts\Enemies\CommonBehaviours\WithinDistance.cs" />
@@ -101,7 +102,7 @@
     <Compile Include="Assets\Scripts\WeaponSystem\Source\WeaponClasses\RangedWeapon.cs" />
     <Compile Include="Assets\Scripts\PathFinding_AStar\PathFinder.cs" />
     <Compile Include="Assets\Scripts\BehaviourTree\Source\Nodes\Action\Task.cs" />
-    <Compile Include="Assets\Scripts\BehaviourTree\Source\Nodes\Composite\ExecuteAll.cs" />
+    <Compile Include="Assets\Scripts\Heap.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

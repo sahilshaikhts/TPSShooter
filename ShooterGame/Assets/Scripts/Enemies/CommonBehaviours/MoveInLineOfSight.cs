@@ -41,7 +41,7 @@ public class MoveInLineOfSight : Node
         {
             if (CheckIfCanShootTarget(m_ownerCharacter.GetPositionOfHead(), targetCharacter) == false)
             {
-                shootableSpotPosition = FindASpotToShootFrom(3);
+                shootableSpotPosition = FindASpotToShootFrom(4);
                 //If couldn't find any close spot to shoot from return failure.
                 if (shootableSpotPosition.HasValue == false)
                 {

@@ -11,7 +11,7 @@ namespace Sahil
 		[SerializeField] protected Vector2Int m_gridSize;
 
 		[SerializeField] protected float m_cellSize;
-
+		public int Count { get { return m_grid.GetLength(0) * m_grid.GetLength(1); } }
 
 		///<summary>
 		/// GridOrigin:Bottom-Left cell's world position

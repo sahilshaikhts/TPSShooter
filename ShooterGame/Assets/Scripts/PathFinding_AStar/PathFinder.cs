@@ -18,7 +18,7 @@ namespace Sahil.AStar
             Cell_AStar targetCell = m_grid.GetCellFromWorldPosition(aTargetPosition);
 
             List<Cell_AStar> vistiedCells = new List<Cell_AStar>();
-            List<Cell_AStar> openCells = new List<Cell_AStar>();
+            Heap<Cell_AStar> openCells = new Heap<Cell_AStar>(m_grid.Count);
 
             //if origin or target cell is not walkable return null
             if (targetCell.IsWalkable() == false)
@@ -45,18 +45,10 @@ namespace Sahil.AStar
 
             while (openCells.Count > 0)
             {
-                Cell_AStar currentCell = openCells[0];
+                Cell_AStar currentCell = openCells.RemoveFirst();
 
-                for (int i = 1; i < openCells.Count; i++)
-                {
-                    if (openCells[i].FCost < currentCell.FCost || openCells[i].FCost == currentCell.FCost && openCells[i].HCost < currentCell.HCost)
-                    {
-                        currentCell = openCells[i];
-                    }
-                }
 
                 vistiedCells.Add(currentCell);
-                openCells.Remove(currentCell);
 
                 if (currentCell == targetCell)
                 {
@@ -95,6 +87,7 @@ namespace Sahil.AStar
 
             return Vector3.zero;
         }
+
         private List<Cell_AStar> GetPath(Cell_AStar aStartCell, Cell_AStar aEndCell)
         {
             List<Cell_AStar> path = new List<Cell_AStar>();

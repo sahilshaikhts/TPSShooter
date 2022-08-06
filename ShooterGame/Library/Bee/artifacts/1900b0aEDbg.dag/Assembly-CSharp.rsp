@@ -366,6 +366,7 @@
 "Assets/Scripts/GameManager.cs"
 "Assets/Scripts/Grid/Cell.cs"
 "Assets/Scripts/Grid/Grid.cs"
+"Assets/Scripts/Heap.cs"
 "Assets/Scripts/InputSystem/Input/InputDevice.cs"
 "Assets/Scripts/InputSystem/Input/KeyBindings.cs"
 "Assets/Scripts/InputSystem/InputManager.cs"
