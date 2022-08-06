@@ -86,14 +86,6 @@ public class Player : Character,IShotable
 
     private void OnDrawGizmos()
     {
-        //if (GameManager.instance.GetGridForPathFinding() == null) return;
-        //Gizmos.color = Color.green;
-        //Vector3 pos = GameManager.instance.GetGridForPathFinding().GetCellFromWorldPosition(transform.position).GetWorldPosition();
-        //Gizmos.DrawCube(pos+Vector3.up * .3f, Vector3.one * 2);
-        //Gizmos.color = Color.red;
-        //pos = GameManager.instance.GetGridForPathFinding().GetCellFromWorldPosition(target.transform.position).GetWorldPosition();
-        //Gizmos.DrawCube(pos+Vector3.up*.3f, Vector3.one*2);
-
         List<Vector3>path= m_pathFinder.GetNeighbourCellsPosition(transform.position,3);
 
         if (path == null) return;

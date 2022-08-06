@@ -77,20 +77,38 @@ namespace Sahil
 			return neighbours;
 		}
 
-		public List<T> GetNeighboursInGridRadius(T aCell,int aCellRadius)
+        /*public List<T> GetNeighboursInGridRadius(T aCell, int aCellRadius)
+        {
+            List<T> neighbours = new List<T>();
+            for (int x = -aCellRadius; x <= aCellRadius; x++)
+            {
+                for (int y = -aCellRadius; y <= aCellRadius; y++)
+                {
+                    if (x == 0 && y == 0) continue;
+
+                    T cell = GetCellIfValid(aCell.GetGridPosition() + new Vector2Int(x, y));
+
+                    if (cell != null)
+                        neighbours.Add(cell);
+                }
+            }
+            return neighbours;
+        }*/
+        public List<T> GetNeighboursInGridRadius(T aCell, int aCellRadius)
 		{
 			List<T> neighbours = new List<T>();
-			for (int x = -aCellRadius; x <= aCellRadius; x++)
+			for (int n = 1; n <= aCellRadius; n++)
 			{
-				for (int y = -aCellRadius; y <= aCellRadius; y++)
-				{
-					if (x == 0 && y == 0) continue;
+				for (int x = -1 * n; x <= 1 * n; x++)
+					for (int y = -1 * n; y <= 1 * n; y++)
+					{
+						if (x == 0 && y == 0) continue;
 
-					T cell = GetCellIfValid(aCell.GetGridPosition() + new Vector2Int(x, y));
+						T cell = GetCellIfValid(aCell.GetGridPosition() + new Vector2Int(x, y));
 
-					if (cell != null)
-						neighbours.Add(cell);
-				}
+						if (cell != null)
+							neighbours.Add(cell);
+					}
 			}
 			return neighbours;
 		}

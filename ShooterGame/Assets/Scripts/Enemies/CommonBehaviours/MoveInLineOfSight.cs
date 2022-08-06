@@ -111,19 +111,14 @@ public class MoveInLineOfSight : Node
                     spotsToShootFrom.Add(spot);
             }
         }
+
         
-        //From the shootable list of cells find the clossest one.
-        Vector3? nearestSpot=null;
-        float nearestSpotDist = float.MaxValue;
-        for(int i=0;i<spotsToShootFrom.Count;i++)
+        if (spotsToShootFrom.Count > 0)
         {
-            if ((m_ownerCharacter.GetPosition() - spotsToShootFrom[i]).sqrMagnitude < nearestSpotDist)
-            {
-                nearestSpot = spotsToShootFrom[i];
-                nearestSpotDist = (m_ownerCharacter.GetPosition() - spotsToShootFrom[i]).sqrMagnitude;
-            }
+            float dist = (m_ownerCharacter.GetPosition() - spotsToShootFrom[0]).sqrMagnitude;
+            return spotsToShootFrom[0];
         }
 
-        return nearestSpot;
+        return null;
     }
 }

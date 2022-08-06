@@ -33,23 +33,5 @@ namespace Sahil.AStar
 			return m_grid;
 		}
 
-		public List<Cell_AStar> GetNeighbours(Cell_AStar aCell)
-        {
-			List<Cell_AStar> neighbours = new List<Cell_AStar>();
-			for(int x=-1;x<=1;x++)
-            {
-				for(int y=-1;y<=1;y++)
-                {
-					if (x == 0 && y == 0) continue;
-
-					Cell_AStar cell=GetCellIfValid(aCell.GetGridPosition()+new Vector2Int(x, y));
-
-					if(cell!=null)
-						neighbours.Add(cell);
-                }
-            }
-			return neighbours;
-        }
- 
 	}
 }

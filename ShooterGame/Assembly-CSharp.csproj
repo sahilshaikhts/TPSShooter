@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\WeaponSystem\GM_WeaponHolder.cs" />
     <Compile Include="Assets\Scripts\InputSystem\InputManager.cs" />
+    <Compile Include="Assets\Scripts\Heap.cs" />
     <Compile Include="Assets\Scripts\WeaponSystem\Source\Ishotable.cs" />
     <Compile Include="Assets\Scripts\Grid\Grid.cs" />
     <Compile Include="Assets\Scripts\BehaviourTree\Source\Nodes\Conditional\BoolCondition.cs" />
@@ -102,7 +103,6 @@
     <Compile Include="Assets\Scripts\WeaponSystem\Source\WeaponClasses\RangedWeapon.cs" />
     <Compile Include="Assets\Scripts\PathFinding_AStar\PathFinder.cs" />
     <Compile Include="Assets\Scripts\BehaviourTree\Source\Nodes\Action\Task.cs" />
-    <Compile Include="Assets\Scripts\Heap.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
