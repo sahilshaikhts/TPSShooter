@@ -3,7 +3,7 @@ using Sahil;
 using Sahil.AStar;
 using ShootingGame;
 using UnityEngine;
-
+using EventSystem;
 public class BT_lumin : BehaviourTree
 {
     AIInfo m_aiInfo;
@@ -17,6 +17,7 @@ public class BT_lumin : BehaviourTree
 
     public void Start()
     {
+        GameManager.instance.GetEventManager().SubscribeToEvent(PlayerAboutToShootEvent.EventType(), HandlePlayerAboutToShoot);
         m_pathFinder = new PathFinder(GameManager.instance.GetGridForPathFinding());
 
         m_aiInfo = new AIInfo(m_self, m_player, m_pathFinder, m_layerMask);
@@ -86,6 +87,11 @@ public class BT_lumin : BehaviourTree
 
         base.UpdateNodes();
         m_aiInfo.ResetCalculatedData();
+    }
+
+    void HandlePlayerAboutToShoot(IEvent aEvent)
+    {
+        Debug.Log("Shootinggg");
     }
 }
 

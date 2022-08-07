@@ -79,7 +79,7 @@ public class MoveInLineOfSight : Node
         
         Debug.DrawRay(ray.origin,ray.direction*100,Color.red,.5f);
         
-        if (Physics.SphereCast(ray,1, out hit, m_weaponLayerMask))
+        if (Physics.SphereCast(ray,1, out hit, float.MaxValue,m_weaponLayerMask))
         {
             //If ray hits target return true.
             if (hit.transform.gameObject.layer == aTargetCharacter.GetCharacterLayer())

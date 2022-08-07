@@ -1,13 +1,15 @@
+using CameraSystem;
 using EventSystem;
+using ShootingGame;
 using UnityEngine;
 
 public class PlayerController
 {
-    GameObject m_owner;
-    GameObject m_camera;
+    Character m_owner;
+    BaseCamera m_camera;
     EventManager m_eventManager;
 
-    public PlayerController(GameObject aOwner, GameObject aCamera) 
+    public PlayerController(Character aOwner, BaseCamera aCamera) 
     {
         m_owner = aOwner;
         m_camera = aCamera;
@@ -28,6 +30,9 @@ public class PlayerController
             case "Fire":
                 m_eventManager.AddEvent(new WeaponFireEvent(m_owner));
                 break;
+            case "FocusAimming":
+                m_eventManager.AddEvent(new WeaponDrawEvent(m_owner));
+                break;
         }
     }
 
@@ -44,5 +49,4 @@ public class PlayerController
                 break;
         }
     }
-    void SetCamera(GameObject aCamera) { m_camera = aCamera; }
 }

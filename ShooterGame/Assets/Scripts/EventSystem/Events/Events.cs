@@ -1,14 +1,15 @@
+using ShootingGame;
 using UnityEngine;
 
 namespace EventSystem
 {
 public class MoveEvent : IEvent
 {
-    GameObject m_gameObject;
+    Character m_gameObject;
     Vector3 m_direction;
-    public MoveEvent(GameObject aGameObject,Vector3 direction) { m_direction = direction; m_gameObject = aGameObject; }
+    public MoveEvent(Character aGameObject,Vector3 direction) { m_direction = direction; m_gameObject = aGameObject; }
     public Vector3 GetDirection() { return m_direction; }
-    public GameObject GetCallerGameObject() { return m_gameObject; }
+    public Character GetCallerGameObject() { return m_gameObject; }
 
     public string GetEventType() { return "MoveEvent"; }
     public static string EventType() { return "MoveEvent"; }
@@ -16,9 +17,9 @@ public class MoveEvent : IEvent
 
 public class JumpEvent : IEvent
 {
-    GameObject m_gameObject;
-    public JumpEvent(GameObject aGameObject) { m_gameObject = aGameObject; }
-    public GameObject GetCallerGameObject() { return m_gameObject; }
+    Character m_callerCharacter;
+    public JumpEvent(Character aCallerCharacter) { m_callerCharacter = aCallerCharacter; }
+    public Character GetCallerCharacter() { return m_callerCharacter; }
 
     public string GetEventType() { return "JumpEvent"; }
     public static string EventType() { return "JumpEvent"; }
@@ -26,11 +27,11 @@ public class JumpEvent : IEvent
 
 public class RotateEvent : IEvent
 {
-    GameObject m_gameObject;
+    Character m_callerCharacter;
     Vector3 m_amount;
 
-    public RotateEvent(GameObject aGameObject,Vector3 aAmount) { m_gameObject = aGameObject; m_amount = aAmount; }
-    public GameObject GetCallerGameObject() { return m_gameObject; }
+    public RotateEvent(Character aCallerCharacter, Vector3 aAmount) { m_callerCharacter = aCallerCharacter; m_amount = aAmount; }
+    public Character GetCallerCharacter() { return m_callerCharacter; }
 
     public string GetEventType() { return "RotateEvent"; }
     public static string EventType() { return "RotateEvent"; }
@@ -82,15 +83,36 @@ public class ToggleInputEvent : IEvent
     public static string EventType() { return "ToggleInputEvent"; }
 }
 
+public class WeaponDrawEvent : IEvent
+{
+    Character m_callerCharacter;
+
+    public WeaponDrawEvent(Character aCallerCharacter) { m_callerCharacter = aCallerCharacter; }
+    public Character GetCallerCharacter() { return m_callerCharacter; }
+
+    public string GetEventType() { return "WeaponDrawEvent"; }
+    public static string EventType() { return "WeaponDrawEvent"; }
+}
+
 public class WeaponFireEvent : IEvent
 {
-    GameObject m_callerObject;
+    Character m_callerCharacter;
 
-    public WeaponFireEvent(GameObject aCallerObject) { m_callerObject = aCallerObject; }
-    public GameObject GetCallerObject() { return m_callerObject; }
+    public WeaponFireEvent(Character aCallerCharacter) { m_callerCharacter = aCallerCharacter; }
+    public Character GetCallerCharacter() { return m_callerCharacter; }
 
     public string GetEventType() { return "WeponFireEvent"; }
     public static string EventType() { return "WeponFireEvent"; }
+}
+public class PlayerAboutToShootEvent : IEvent
+{
+    Character m_playersTarget;
+
+    public PlayerAboutToShootEvent(Character aPlayersTarget) { m_playersTarget = aPlayersTarget; }
+    public Character GetPlayersTarget() { return m_playersTarget; }
+
+    public string GetEventType() { return "PlayerAboutToShootEvent"; }
+    public static string EventType() { return "PlayerAboutToShootEvent"; }
 }
 
 }

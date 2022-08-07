@@ -119,7 +119,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 79
+  controlID: 105
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -144,7 +144,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 80
+  controlID: 16
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -169,7 +169,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 81
+  controlID: 17
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -501,9 +501,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 10.202667, y: -13.944397, z: 16.416763}
+    m_Target: {x: -13.222397, y: -62.556335, z: -55.808834}
     speed: 2
-    m_Value: {x: 10.202667, y: -13.944397, z: 16.416763}
+    m_Value: {x: -13.222397, y: -62.556335, z: -55.808834}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -520,7 +520,7 @@ MonoBehaviour:
     showImageEffects: 1
     showParticleSystems: 1
     showVisualEffectGraphs: 1
-    m_FxEnabled: 1
+    m_FxEnabled: 0
   m_Grid:
     xGrid:
       m_Fade:
@@ -550,13 +550,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.31073058, y: 0.29616633, z: -0.10258894, w: 0.8975408}
+    m_Target: {x: -0.1259809, y: 0.8553621, z: -0.43908978, w: -0.24506894}
     speed: 2
-    m_Value: {x: 0.3106728, y: 0.29611126, z: -0.10256986, w: 0.8973739}
+    m_Value: {x: -0.12595734, y: 0.85520214, z: -0.43900767, w: -0.2450231}
   m_Size:
-    m_Target: 37.24713
+    m_Target: 46.4167
     speed: 2
-    m_Value: 37.24713
+    m_Value: 46.4167
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -612,23 +612,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: de530000
-      m_LastClickedID: 0
-      m_ExpandedIDs: 44e0ffffeae3ffffd8e5ffffa2e9ffff1cebffff08fbffff
+      m_SelectedIDs: 54500000
+      m_LastClickedID: 20564
+      m_ExpandedIDs: 08fbffff604e0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: Laser bombardment
-        m_OriginalName: Laser bombardment
+        m_Name: 
+        m_OriginalName: 
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: -5726
+        m_UserData: 0
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 0
+        m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 8}
       m_SearchString: 
@@ -788,21 +788,21 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 2a540000
     m_LastClickedID: 21546
-    m_ExpandedIDs: 000000000e540000885e0000
+    m_ExpandedIDs: 000000000c540000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: Scenes
-      m_OriginalName: Scenes
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 21546
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 10}
     m_SearchString: 
@@ -816,7 +816,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000000e54000010540000
+    m_ExpandedIDs: 000000000c540000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -847,18 +847,18 @@ MonoBehaviour:
     m_ExpandedInstanceIDs: c6230000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: DemoScense
-      m_OriginalName: DemoScense
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 24210
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 10}
     m_CreateAssetUtility:
