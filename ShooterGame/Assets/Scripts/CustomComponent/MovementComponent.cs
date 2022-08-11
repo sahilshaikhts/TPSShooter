@@ -111,13 +111,10 @@ public class MovementComponent : MonoBehaviour
         if (doJump) { PerformJump(); }
         doJump = false;
 
-        if (m_additionalForce.sqrMagnitude > 0)
-        {
-            m_velocity += m_additionalForce; m_additionalForce = Vector3.zero;
-        }
+        m_velocity += m_additionalForce; 
+        m_additionalForce = Vector3.zero;
 
         ApplyVelocity();
-
         
 
         if (m_additionalRotationDirection.sqrMagnitude > 0)

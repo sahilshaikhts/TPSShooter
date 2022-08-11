@@ -13,18 +13,14 @@ public class Sequence : Node
             switch (node.Execute())
             {
                 case NodeState.Sucessful:
-                    m_state = NodeState.Sucessful;
                     break;
                 case NodeState.Failed:
-                    m_state = NodeState.Failed;
-                    return m_state;
-                    break;
+                    return NodeState.Failed;
                 case NodeState.Running:
                     return NodeState.Running;
-                    break;
             }
         }
-        return m_state;
+        return NodeState.Sucessful;
     }
 
 }

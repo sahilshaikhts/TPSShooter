@@ -79,23 +79,26 @@ namespace ShootingGame
         }
         void HandleWeaponDrawEvent(IEvent aEvent)
         {
+            //TODO: Although optimal, I don't like this being done here!!
+            //If enemy has better range for detecting weather player is looking/aimming towards it; This won't work.
+
             WeaponDrawEvent weaponFireEvent = (WeaponDrawEvent)aEvent;
             if (weaponFireEvent.GetCallerCharacter() == this)
             {
                 Collider[] enemies_nearBy;
                 enemies_nearBy = Physics.OverlapSphere(transform.position, 15, m_enemyLayerMask);
 
-                float fov = m_followCamera.GetCamera().fieldOfView;
+                Vector3 enemyDirection;
+
+                float dot;
+                float angleBetweenEnemy;
 
                 foreach (Collider enemy in enemies_nearBy)
                 {
-                    Vector3 enemyDirection = enemy.transform.position - transform.position;
+                    enemyDirection = enemy.transform.position - transform.position;
 
-                    float dot = Mathf.Clamp(Vector3.Dot(transform.forward, enemyDirection.normalized),-1,1);
-                    float angleBetweenEnemy = Mathf.Acos(dot) * Mathf.Rad2Deg;
-                    Debug.Log(angleBetweenEnemy);
-
-                    //****Change it to check from camera forward ignoring the x rotation.
+                    dot = Mathf.Clamp(Vector3.Dot(transform.forward, enemyDirection.normalized), -1, 1);
+                    angleBetweenEnemy = Mathf.Acos(dot) * Mathf.Rad2Deg;
 
                     if (angleBetweenEnemy < 25)
                     {

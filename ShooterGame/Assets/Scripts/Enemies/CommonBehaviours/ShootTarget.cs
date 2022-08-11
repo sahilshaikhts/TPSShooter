@@ -19,7 +19,7 @@ public class ShootTarget : Node
         Vector3 ownerPosition = aIInfo.GetOwnerCharacter().GetPositionOfHead();
         Vector3 targetPostion = aIInfo.GetTargetCharacter().GetPositionOfHead();
         
-        if(aIInfo.canShoot == false)
+        if(aIInfo.bCanShoot == false)
         {
             return NodeState.Failed;
         }

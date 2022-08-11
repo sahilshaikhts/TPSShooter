@@ -103,6 +103,9 @@
     <Compile Include="Assets\Scripts\WeaponSystem\Source\WeaponClasses\RangedWeapon.cs" />
     <Compile Include="Assets\Scripts\PathFinding_AStar\PathFinder.cs" />
     <Compile Include="Assets\Scripts\BehaviourTree\Source\Nodes\Action\Task.cs" />
+    <Compile Include="Assets\Scripts\BehaviourTree\Source\Nodes\Conditional\Countdown.cs" />
+    <Compile Include="Assets\Scripts\BehaviourTree\Source\Nodes\Composite\SelectFromRange.cs" />
+    <Compile Include="Assets\Scripts\BehaviourTree\Source\Nodes\Composite\SelectFromRange_Seq.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
