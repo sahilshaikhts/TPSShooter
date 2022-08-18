@@ -28,7 +28,7 @@ namespace Behaviourtree
             float valueToCheck=(float)GetData(key_value);
             for (int i = 0; i < m_childNodes.Count; i++)
             {
-                if (valueToCheck > m_range[i].x && valueToCheck < m_range[i].y)
+                if (valueToCheck >= m_range[i].x && valueToCheck < m_range[i].y)
                 {
                     switch (m_childNodes[i].Execute())
                     {

@@ -25,4 +25,16 @@ namespace EventSystem
         public string GetEventType() { return "AIShootTargetEvent"; }
         public static string EventType() { return "AIShootTargetEvent"; }
     }
+
+    public class AILookTowardsEvent : IEvent
+    {
+        Character m_character;
+        Vector3 m_lookDirection;
+        public AILookTowardsEvent(Character aCharacter, Vector3 aTargetDirection) { m_lookDirection = aTargetDirection; m_character = aCharacter; }
+        public Vector3 GetDirection() { return m_lookDirection; }
+        public Character GetCaller() { return m_character; }
+
+        public string GetEventType() { return "AILookTowardsEvent"; }
+        public static string EventType() { return "AILookTowardsEvent"; }
+    }
 }

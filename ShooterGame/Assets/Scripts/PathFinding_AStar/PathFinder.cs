@@ -32,7 +32,7 @@ namespace Sahil.AStar
 
                 for (int i = 0; i < positions.Count; i++)
                 {
-                    if ((aTargetPosition - positions[i]).sqrMagnitude < nearestSpotDist)
+                    if ((aTargetPosition - positions[i]).sqrMagnitude < nearestSpotDist && targetCell!= m_grid.GetCellFromWorldPosition((Vector3)positions[i]))
                     {
                         nearestSpot = positions[i];
                         nearestSpotDist = (aTargetPosition - positions[i]).sqrMagnitude;
@@ -127,6 +127,31 @@ namespace Sahil.AStar
             return neighbours;
 
         }
+        /// <summary>
+        /// Get a straight walkable path in a direction from desired origin. 
+        /// Only return path until hit unwalkable cell.
+        /// </summary>
+        /// <param name="aOrigin"></param>
+        /// <param name="aDirection"></param>
+        /// <param name="aMaxCount"></param>
+        /// <returns></returns>
+        public List<Vector3> GetWalkablePathInDirection(Vector3 aOrigin,Vector3 aDirection, int aMaxCount)
+        {
+            List<Vector3> neighbours = new List<Vector3>();
+            List<Cell_AStar> neighbourCells = m_grid.GetCellsInADirection(aOrigin, aDirection, aMaxCount);
+            if (neighbourCells == null) return null;
+            for (int i = 0; i < aMaxCount; i++)
+            {
+                if(neighbourCells[i].IsWalkable())
+                {
+                    neighbours.Add(neighbourCells[i].GetWorldPosition());   //Keep adding a cell until we step on unwalable cell,in which case return with the path.
+                }else
+                    return neighbours;
+            }
+
+            return neighbours;
+
+        }
 
         public List<Vector3> GetWalkableNeighbourCellsPosition(Vector3 aCenter,int aCellRadius)
         {
@@ -145,7 +170,7 @@ namespace Sahil.AStar
 
         public Cell_AStar GetCellFromWorldPos(Vector3 aPosition) { return m_grid.GetCellFromWorldPosition(aPosition); }
 
-        public bool IsWalkable(Vector3 aWorldPosition)=>m_grid.GetCellFromWorldPosition(aWorldPosition).IsWalkable();
+        public bool IsWalkable(Vector3 aWorldPosition)=> m_grid.CheckIfCellExits(aWorldPosition)&& m_grid.GetCellFromWorldPosition(aWorldPosition).IsWalkable();
 
     }
 }

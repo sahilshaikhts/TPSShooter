@@ -357,6 +357,8 @@
 "Assets/Scripts/Character/Player/Controller/PlayerController.cs"
 "Assets/Scripts/Character/Player/Player.cs"
 "Assets/Scripts/CustomComponent/MovementComponent.cs"
+"Assets/Scripts/Enemies/CommonBehaviours/Dodge.cs"
+"Assets/Scripts/Enemies/CommonBehaviours/LookAtPlayer.cs"
 "Assets/Scripts/Enemies/CommonBehaviours/MoveInLineOfSight.cs"
 "Assets/Scripts/Enemies/CommonBehaviours/MoveTowards.cs"
 "Assets/Scripts/Enemies/CommonBehaviours/ShootTarget.cs"

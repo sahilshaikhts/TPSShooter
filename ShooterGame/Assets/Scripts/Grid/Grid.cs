@@ -46,9 +46,12 @@ namespace Sahil
 		public T GetCellFromWorldPosition(Vector3 aWorldPosition)
 		{
 			Vector3 localPos=new Vector3(aWorldPosition.x,aWorldPosition.y,aWorldPosition.z) - m_gridOrigin;
-			return m_grid[Mathf.RoundToInt(localPos.x / m_cellSize), Mathf.RoundToInt(localPos.z / m_cellSize)];
 
+			T cell=GetCellIfValid(new Vector2Int(Mathf.RoundToInt(localPos.x / m_cellSize), Mathf.RoundToInt(localPos.z / m_cellSize)));
+
+			return cell;
 		}
+
 
 		protected T GetCellIfValid(Vector2Int aGridPosition)
         {
@@ -77,23 +80,6 @@ namespace Sahil
 			return neighbours;
 		}
 
-        /*public List<T> GetNeighboursInGridRadius(T aCell, int aCellRadius)
-        {
-            List<T> neighbours = new List<T>();
-            for (int x = -aCellRadius; x <= aCellRadius; x++)
-            {
-                for (int y = -aCellRadius; y <= aCellRadius; y++)
-                {
-                    if (x == 0 && y == 0) continue;
-
-                    T cell = GetCellIfValid(aCell.GetGridPosition() + new Vector2Int(x, y));
-
-                    if (cell != null)
-                        neighbours.Add(cell);
-                }
-            }
-            return neighbours;
-        }*/
         public List<T> GetNeighboursInGridRadius(T aCell, int aCellRadius)
 		{
 			List<T> neighbours = new List<T>();

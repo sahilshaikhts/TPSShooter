@@ -31,7 +31,10 @@ public class PlayerController
                 m_eventManager.AddEvent(new WeaponFireEvent(m_owner));
                 break;
             case "FocusAimming":
-                m_eventManager.AddEvent(new WeaponDrawEvent(m_owner));
+                m_eventManager.AddEvent(new WeaponDrawEvent(m_owner,true));
+                break;
+            case "UnFocusAimming":
+                m_eventManager.AddEvent(new WeaponDrawEvent(m_owner, false));
                 break;
         }
     }

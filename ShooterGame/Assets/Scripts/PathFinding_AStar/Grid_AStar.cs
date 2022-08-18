@@ -33,5 +33,26 @@ namespace Sahil.AStar
 			return m_grid;
 		}
 
+
+		public List<Cell_AStar> GetCellsInADirection(Vector3 aWorldPosition, Vector3 aDirection, int aCount)
+		{
+			List<Cell_AStar> cells = new List<Cell_AStar>();
+
+			//Get the exact center world position of the the origin cell for better accuracy.
+			Vector3 originCellWorldPos = GetCellFromWorldPosition(aWorldPosition).GetWorldPosition();
+
+			Cell_AStar cell;
+			for (int i = 1; i <= aCount; i++)
+			{
+				cell = GetCellFromWorldPosition(originCellWorldPos + aDirection * i* m_cellSize);
+				if(cell != null)
+					cells.Add(cell);
+			}
+
+			return cells;
+		}
+
+		public bool CheckIfCellExits(Vector3 aWPosition)=>GetCellFromWorldPosition(aWPosition)==null?false:true;
+
 	}
 }

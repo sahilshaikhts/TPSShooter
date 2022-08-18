@@ -150,7 +150,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2353154}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1533207119}
+  m_Script: {fileID: 811088059}
   m_Name: 
   m_EditorClassIdentifier: 
   m_projectileFXData:
@@ -408,7 +408,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 23677685}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1533207119}
+  m_Script: {fileID: 811088059}
   m_Name: 
   m_EditorClassIdentifier: 
   m_projectileFXData:
@@ -636,7 +636,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 43422360}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1533207119}
+  m_Script: {fileID: 811088059}
   m_Name: 
   m_EditorClassIdentifier: 
   m_projectileFXData:
@@ -1090,7 +1090,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 120243337}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1533207119}
+  m_Script: {fileID: 811088059}
   m_Name: 
   m_EditorClassIdentifier: 
   m_projectileFXData:
@@ -1217,9 +1217,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 475e6e7d6e519e9489d5a3c5c9c78f50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LookTowardsMovementDirection: 1
-  m_speed: 16
-  m_maxSpeed: 9
+  LookTowardsMovementDirection: 0
+  m_speed: 10
+  m_maxSpeed: 8
   m_jumpSpeed: 10
   m_gravityAccelaration: -10
   m_turnSpeed: 8
@@ -1289,7 +1289,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 144003142}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1533207119}
+  m_Script: {fileID: 811088059}
   m_Name: 
   m_EditorClassIdentifier: 
   m_projectileFXData:
@@ -1448,7 +1448,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 160314188}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1533207119}
+  m_Script: {fileID: 811088059}
   m_Name: 
   m_EditorClassIdentifier: 
   m_projectileFXData:
@@ -1712,7 +1712,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 198230455}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1533207119}
+  m_Script: {fileID: 811088059}
   m_Name: 
   m_EditorClassIdentifier: 
   m_projectileFXData:
@@ -1970,7 +1970,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 261166557}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1533207119}
+  m_Script: {fileID: 811088059}
   m_Name: 
   m_EditorClassIdentifier: 
   m_projectileFXData:
@@ -2729,7 +2729,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 336254623}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1533207119}
+  m_Script: {fileID: 811088059}
   m_Name: 
   m_EditorClassIdentifier: 
   m_projectileFXData:
@@ -2791,7 +2791,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 337786164}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1533207119}
+  m_Script: {fileID: 811088059}
   m_Name: 
   m_EditorClassIdentifier: 
   m_projectileFXData:
@@ -3271,7 +3271,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 371715495}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1533207119}
+  m_Script: {fileID: 811088059}
   m_Name: 
   m_EditorClassIdentifier: 
   m_projectileFXData:
@@ -3499,7 +3499,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 396585054}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1533207119}
+  m_Script: {fileID: 811088059}
   m_Name: 
   m_EditorClassIdentifier: 
   m_projectileFXData:
@@ -3659,7 +3659,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 418454546}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1533207119}
+  m_Script: {fileID: 811088059}
   m_Name: 
   m_EditorClassIdentifier: 
   m_projectileFXData:
@@ -3815,7 +3815,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 433742186}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1533207119}
+  m_Script: {fileID: 811088059}
   m_Name: 
   m_EditorClassIdentifier: 
   m_projectileFXData:
@@ -4507,7 +4507,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 501973663}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1533207119}
+  m_Script: {fileID: 811088059}
   m_Name: 
   m_EditorClassIdentifier: 
   m_projectileFXData:
@@ -4569,7 +4569,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 502730301}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1533207119}
+  m_Script: {fileID: 811088059}
   m_Name: 
   m_EditorClassIdentifier: 
   m_projectileFXData:
@@ -4827,7 +4827,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 522656003}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1533207119}
+  m_Script: {fileID: 811088059}
   m_Name: 
   m_EditorClassIdentifier: 
   m_projectileFXData:
@@ -5620,7 +5620,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 658207171}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1533207119}
+  m_Script: {fileID: 811088059}
   m_Name: 
   m_EditorClassIdentifier: 
   m_projectileFXData:
@@ -6860,7 +6860,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 787486883}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1533207119}
+  m_Script: {fileID: 811088059}
   m_Name: 
   m_EditorClassIdentifier: 
   m_projectileFXData:
@@ -6895,6 +6895,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 81
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!115 &811088059
+MonoScript:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  serializedVersion: 5
+  m_Script: 
+  m_DefaultReferences: {}
+  m_Icon: {fileID: 0}
+  m_ExecutionOrder: 0
+  m_ClassName: Projectile
+  m_Namespace: WeaponSystem
 --- !u!1 &825948090
 GameObject:
   m_ObjectHideFlags: 0
@@ -7065,7 +7079,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 831296872}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1533207119}
+  m_Script: {fileID: 811088059}
   m_Name: 
   m_EditorClassIdentifier: 
   m_projectileFXData:
@@ -7293,7 +7307,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 858409046}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1533207119}
+  m_Script: {fileID: 811088059}
   m_Name: 
   m_EditorClassIdentifier: 
   m_projectileFXData:
@@ -7500,7 +7514,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 882023443}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1533207119}
+  m_Script: {fileID: 811088059}
   m_Name: 
   m_EditorClassIdentifier: 
   m_projectileFXData:
@@ -7660,7 +7674,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 908349491}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1533207119}
+  m_Script: {fileID: 811088059}
   m_Name: 
   m_EditorClassIdentifier: 
   m_projectileFXData:
@@ -8133,7 +8147,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 969010889}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1533207119}
+  m_Script: {fileID: 811088059}
   m_Name: 
   m_EditorClassIdentifier: 
   m_projectileFXData:
@@ -8660,7 +8674,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1037205463}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1533207119}
+  m_Script: {fileID: 811088059}
   m_Name: 
   m_EditorClassIdentifier: 
   m_projectileFXData:
@@ -9434,7 +9448,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1137534992}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1533207119}
+  m_Script: {fileID: 811088059}
   m_Name: 
   m_EditorClassIdentifier: 
   m_projectileFXData:
@@ -10088,7 +10102,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1178313335}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1533207119}
+  m_Script: {fileID: 811088059}
   m_Name: 
   m_EditorClassIdentifier: 
   m_projectileFXData:
@@ -10150,7 +10164,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1192036161}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1533207119}
+  m_Script: {fileID: 811088059}
   m_Name: 
   m_EditorClassIdentifier: 
   m_projectileFXData:
@@ -11875,7 +11889,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1455044398}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1533207119}
+  m_Script: {fileID: 811088059}
   m_Name: 
   m_EditorClassIdentifier: 
   m_projectileFXData:

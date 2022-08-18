@@ -60,15 +60,18 @@
     <Compile Include="Assets\Scripts\InputSystem\InputManager.cs" />
     <Compile Include="Assets\Scripts\Heap.cs" />
     <Compile Include="Assets\Scripts\WeaponSystem\Source\Ishotable.cs" />
+    <Compile Include="Assets\Scripts\Enemies\CommonBehaviours\LookAtPlayer.cs" />
     <Compile Include="Assets\Scripts\Grid\Grid.cs" />
     <Compile Include="Assets\Scripts\BehaviourTree\Source\Nodes\Conditional\BoolCondition.cs" />
     <Compile Include="Assets\Scripts\InputSystem\Input\KeyBindings.cs" />
+    <Compile Include="Assets\Scripts\BehaviourTree\Source\Nodes\Composite\SelectFromRange_Seq.cs" />
     <Compile Include="Assets\Scripts\CameraSystem\CameraManager.cs" />
     <Compile Include="Assets\Scripts\BehaviourTree\Source\Nodes\Decorator\Invertor.cs" />
     <Compile Include="Assets\Prefabs\IsWithinRange.cs" />
     <Compile Include="Assets\Scripts\Character\Player\Player.cs" />
     <Compile Include="Assets\Scripts\BehaviourTree\Source\Nodes\Action\SetValue.cs" />
     <Compile Include="Assets\Scripts\BehaviourTree\Source\Nodes\Node.cs" />
+    <Compile Include="Assets\Scripts\BehaviourTree\Source\Nodes\Conditional\Countdown.cs" />
     <Compile Include="Assets\Scripts\CameraSystem\CameraPOI\CameraInterestPoint.cs" />
     <Compile Include="Assets\Scripts\InputSystem\Input\InputDevice.cs" />
     <Compile Include="Assets\Scripts\EventSystem\EventManager.cs" />
@@ -84,6 +87,7 @@
     <Compile Include="Assets\Scripts\WeaponSystem\Source\WeaponClasses\Base\WeaponBase.cs" />
     <Compile Include="Assets\Scripts\Enemies\CommonBehaviours\MoveInLineOfSight.cs" />
     <Compile Include="Assets\Scripts\Enemies\CommonBehaviours\MoveTowards.cs" />
+    <Compile Include="Assets\Scripts\Enemies\CommonBehaviours\Dodge.cs" />
     <Compile Include="Assets\Scripts\BehaviourTree\Source\Nodes\Composite\Selector.cs" />
     <Compile Include="Assets\Scripts\BehaviourTree\Source\Nodes\Conditional\Condition.cs" />
     <Compile Include="Assets\Scripts\PathFinding_AStar\Grid_AStar.cs" />
@@ -92,6 +96,7 @@
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\Enemies\Lumin\Enm_lumin.cs" />
     <Compile Include="Assets\Scripts\CameraSystem\Camera\BaseCamera.cs" />
+    <Compile Include="Assets\Scripts\BehaviourTree\Source\Nodes\Composite\SelectFromRange.cs" />
     <Compile Include="Assets\Scripts\EventSystem\Events\Events.cs" />
     <Compile Include="Assets\Scripts\Grid\Cell.cs" />
     <Compile Include="Assets\Scripts\BehaviourTree\Source\Nodes\Composite\ExecuteAll.cs" />
@@ -103,9 +108,6 @@
     <Compile Include="Assets\Scripts\WeaponSystem\Source\WeaponClasses\RangedWeapon.cs" />
     <Compile Include="Assets\Scripts\PathFinding_AStar\PathFinder.cs" />
     <Compile Include="Assets\Scripts\BehaviourTree\Source\Nodes\Action\Task.cs" />
-    <Compile Include="Assets\Scripts\BehaviourTree\Source\Nodes\Conditional\Countdown.cs" />
-    <Compile Include="Assets\Scripts\BehaviourTree\Source\Nodes\Composite\SelectFromRange.cs" />
-    <Compile Include="Assets\Scripts\BehaviourTree\Source\Nodes\Composite\SelectFromRange_Seq.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

@@ -86,8 +86,8 @@ public class ToggleInputEvent : IEvent
 public class WeaponDrawEvent : IEvent
 {
     Character m_callerCharacter;
-
-    public WeaponDrawEvent(Character aCallerCharacter) { m_callerCharacter = aCallerCharacter; }
+    public bool bWeaponDrawn;
+    public WeaponDrawEvent(Character aCallerCharacter,bool aWeaponDrawn) { m_callerCharacter = aCallerCharacter; bWeaponDrawn = aWeaponDrawn; }
     public Character GetCallerCharacter() { return m_callerCharacter; }
 
     public string GetEventType() { return "WeaponDrawEvent"; }
@@ -104,12 +104,11 @@ public class WeaponFireEvent : IEvent
     public string GetEventType() { return "WeponFireEvent"; }
     public static string EventType() { return "WeponFireEvent"; }
 }
-public class PlayerAboutToShootEvent : IEvent
+public class PlayerWeaponActionEvent : IEvent
 {
-    Character m_playersTarget;
-
-    public PlayerAboutToShootEvent(Character aPlayersTarget) { m_playersTarget = aPlayersTarget; }
-    public Character GetPlayersTarget() { return m_playersTarget; }
+    public bool bWeaponDrawn,bWeaponFired;
+       
+    public PlayerWeaponActionEvent(bool aWeaponFired, bool aWeaponDrawn=false) { bWeaponDrawn = aWeaponFired == true ? true: aWeaponDrawn; bWeaponFired = aWeaponFired; }
 
     public string GetEventType() { return "PlayerAboutToShootEvent"; }
     public static string EventType() { return "PlayerAboutToShootEvent"; }

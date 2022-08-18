@@ -22,12 +22,7 @@ public class MoveTowards : Node
         Vector3? targetPosition= ((Vector3?)GetData(key_targetWPosition));
 
         if (targetPosition == null)
-        {
-            Debug.Log(null);
             return NodeState.Failed;
-        
-        }else
-            Debug.Log(targetPosition);
 
         Vector3 direction = aIInfo.GetPathFinder().GetMoveDirection(ownerPosition, (Vector3)targetPosition);
         
